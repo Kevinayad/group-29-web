@@ -2,7 +2,7 @@ Physion is a mobile and web app that works on improving people's lifestyles by s
 
 
 
-User profile page is a page where users can input data about their body such as height, weight, gender and it’s data is essential to all other parts of the app.
+User has data about their body such as height, weight, gender and it’s data is essential to to the majority of other parts of the app.
 
 
 Reminder is a feature that reminds you throughout the day to follow your goals such as drink water, go for a walk ….
@@ -13,3 +13,6 @@ Statistics is a visual representation of your data in criterias the user chooses
 
 
 Leaderboard is a page where users can set common goals and compete over spots on their specific leaderboard that they made themselves.
+
+
+Food Tracker is  a page where users can choose foods to get nutritional information from and add their own foods to the app.
