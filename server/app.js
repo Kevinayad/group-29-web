@@ -4,7 +4,7 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
-var usersController = ('./controllers/users');
+var usersController = require('./controllers/users');
 // usersController
 
 // Variables
@@ -52,7 +52,7 @@ app.use(history());
 // Serve static assets
 var root = path.normalize(__dirname + '/..');
 var client = path.join(root, 'client', 'dist');
-app.use(exprchess.static(client));
+app.use(express.static(client));
 
 // Error handler (i.e., when exception is thrown) must be registered last
 var env = app.get('env');

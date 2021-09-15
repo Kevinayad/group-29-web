@@ -1,5 +1,4 @@
 var express = require('express');
-const { module } = require('mongoose');
 var router = express.Router();
 
 router.post('/api/users', function(req, res, next) {
@@ -13,6 +12,6 @@ router.post('/api/users', function(req, res, next) {
         res.status(201).json(user);
     });
 
-    modules.export = router;
+    module.exports = router;
     // for exporting modules
 
