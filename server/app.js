@@ -4,6 +4,7 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
+var usersController = ('./controllers/users');
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
@@ -30,10 +31,13 @@ app.use(morgan('dev'));
 app.options('*', cors());
 app.use(cors());
 
-// Import routes
+// Import routes  (Here we start to edit our code)
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
+
+// User code was here
+app.use(usersController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
@@ -46,7 +50,7 @@ app.use(history());
 // Serve static assets
 var root = path.normalize(__dirname + '/..');
 var client = path.join(root, 'client', 'dist');
-app.use(express.static(client));
+app.use(exprchess.static(client));
 
 // Error handler (i.e., when exception is thrown) must be registered last
 var env = app.get('env');
