@@ -5,7 +5,8 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 var usersController = require('./controllers/users');
-// usersController
+var leadboardsController = require('./controllers/leadboards');
+const { json } = require('body-parser');
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
@@ -39,6 +40,18 @@ app.get('/api', function(req, res) {
 
 // Users code was here
 app.use(usersController);
+
+app.post('/api/leadboards', function(req, res, next) {
+           var leadboard = { 
+            "userID": 2,
+            "name": "Anna",
+            "gender": "Female",
+            "goals": "Insert goal"
+}
+res.status(201).json(leadboard);
+});
+
+app.use(leadboardsController);
 
 
 // Catch all non-error handler for api (i.e., Not Found)
