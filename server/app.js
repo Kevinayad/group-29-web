@@ -43,7 +43,6 @@ app.use(usersController);
 
 app.post('/api/leadboards', function(req, res, next) {
            var leadboard = { 
-            "userID": 2,
             "name": "Anna",
             "gender": "Female",
             "goals": "Insert goal"
