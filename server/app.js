@@ -55,9 +55,11 @@ app.get('/users', function(req, res, next) {
 
 app.post('/api/users', function(req, res, next) {
     var user = { 
-     "name": "Anna",
-     "gender": "Female",
-     "goals": "Insert goal"
+     "name": user.name,
+     "gender": user.gender,
+     "height": user.height,
+     "weight": user.weight,
+     "goals": user.goals
 }
 res.status(201).json(user);
 });
