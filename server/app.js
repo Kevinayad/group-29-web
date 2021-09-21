@@ -46,13 +46,13 @@ app.get('/api', function(req, res) {
 
 app.use(usersController);
 
-app.get('/users', function(req, res, next) {
-    User.find(function(err, users) {
-        if (err) { return next(err); }
-        res.json({"users": users});
-    });
-});
-
+// app.get('/api/users', function(req, res, next) {
+//     user.find(function(err, user) {
+//         if (err) { return next(err); }
+//         res.json({"users": user});
+//     });
+// });
+app.get('/api/users', function(req, res) {res.json({"users":user.height});});
 app.post('/api/users', function(req, res, next) {
     var user = { 
      "name": user.name,
@@ -61,6 +61,8 @@ app.post('/api/users', function(req, res, next) {
      "weight": user.weight,
      "goals": user.goals
 }
+user.push(user);
+res.json(user);
 res.status(201).json(user);
 });
 
