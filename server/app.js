@@ -4,7 +4,6 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
-var usersController = require('./controllers/users');
 var leadboardsController = require('./controllers/leadboards');
 var statisticsController = require('./controllers/statistics');
 var foodtracksController = require('./controllers/foodtracks');
@@ -44,29 +43,12 @@ app.get('/api', function(req, res) {
 
 
 
-app.use(usersController);
-
 // app.get('/api/users', function(req, res, next) {
 //     user.find(function(err, user) {
 //         if (err) { return next(err); }
 //         res.json({"users": user});
 //     });
 // });
-app.get('/api/users', function(req, res) {res.json({"users":user.height});});
-app.post('/api/users', function(req, res, next) {
-    var user = { 
-     "name": user.name,
-     "gender": user.gender,
-     "height": user.height,
-     "weight": user.weight,
-     "goals": user.goals
-}
-user.push(user);
-res.json(user);
-res.status(201).json(user);
-});
-
-app.use(leadboardsController);
 
 app.post('/api/leadboards', function(req, res, next) {
            var leadboard = { 
