@@ -6,10 +6,12 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 var usersController = require('./controllers/users');
 var leadboardsController = require('./controllers/leadboards');
+var statisticsController = require('./controllers/statistics');
+var foodtracksController = require('./controllers/foodtracks');
 const { json } = require('body-parser');
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/Pythion';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -39,20 +41,60 @@ app.get('/api', function(req, res) {
 });
 
 // Users code was here
+
+
+
 app.use(usersController);
+
+app.get('/users', function(req, res, next) {
+    User.find(function(err, users) {
+        if (err) { return next(err); }
+        res.json({"users": users});
+    });
+});
+
+app.post('/api/users', function(req, res, next) {
+    var user = { 
+     "name": "Anna",
+     "gender": "Female",
+     "goals": "Insert goal"
+}
+res.status(201).json(user);
+});
+
+app.use(leadboardsController);
 
 app.post('/api/leadboards', function(req, res, next) {
            var leadboard = { 
-            "name": "Anna",
-            "gender": "Female",
+            "name": "Abc",
+            "gender": "FTrue",
             "goals": "Insert goal"
 }
 res.status(201).json(leadboard);
 });
 
-app.use(leadboardsController);
 
+app.use(statisticsController);
 
+app.post('/api/statistics', function(req, res, next) {
+    var statistics = { 
+     "name": "Anna",
+     "gender": "Female",
+     "goals": "Insert goal"
+}
+res.status(201).json(statistics);
+});
+
+app.use(foodtracksController);
+
+app.post('/api/foodtracks', function(req, res, next) {
+    var foodtracks = { 
+     "name": "Anna",
+     "gender": "Female",
+     "goals": "Insert goal"
+}
+res.status(201).json(foodtracks);
+});
 // Catch all non-error handler for api (i.e., Not Found)
 app.use('/api/*', function (req, res) {
     res.status(404).json({ 'message': 'Not Found' });
