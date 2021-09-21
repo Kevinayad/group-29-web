@@ -1,29 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-var leadboardSchema = new Schema ({
-    userID: { type: Number},
-    name: { type: String},
-    gender: { type: String},
-    goals: { type: String}
-
-});
-var Leadboard = mongoose.model('leadboards', leadboardSchema);
+var Leadboard = require('../models/leadboard');
 
 router.post('/api/leadboards', function(req, res, next) {
-    var leadboard = new Leadboard({ 
-            "userID": 2,
-            "name": "Anna",
-            "gender": "Female",
-            "goals": "Insert goal"
-             
-             })
+    var leadboard = new Leadboard(req.body);
              leadboard.save(function(err, leadboard) {
-                if (err) {return console.error(err);}
-             })
+                if (err) {return next(err);}
         res.status(201).json(leadboard);
+    })
     });
 
     module.exports = router;
