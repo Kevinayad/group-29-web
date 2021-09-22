@@ -7,7 +7,10 @@ var history = require('connect-history-api-fallback');
 var leadboardsController = require('./controllers/leadboards');
 var statisticsController = require('./controllers/statistics');
 var foodtracksController = require('./controllers/foodtracks');
-const { json } = require('body-parser');
+var usersController = require('./controllers/users');
+const bodyParser = require('body-parser');
+const { stat } = require('fs/promises');
+//const bodyParser= require('body-parser');
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/Pythion';
@@ -26,6 +29,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
 // Create Express app
 var app = express();
 // Parse requests of content-type 'application/json'
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // HTTP request logger
@@ -34,10 +38,24 @@ app.use(morgan('dev'));
 app.options('*', cors());
 app.use(cors());
 
+//routes 
+app.use(foodtracksController);
+app.use(usersController);
+app.use(statisticsController);
+app.use(leadboardsController);
+
+// Catch all non-error handler for api (i.e., Not Found)
+app.use('/api/*', function (req, res) {
+    res.status(404).json({ 'message': 'Not Found' });
+});
+
+
 // Import routes  (Here we start to edit our code)
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
+
+
 
 // Users code was here
 
@@ -50,17 +68,17 @@ app.get('/api', function(req, res) {
 //     });
 // });
 
-app.post('/api/leadboards', function(req, res, next) {
+/*app.post('/api/leadboards', function(req, res, next) {
            var leadboard = { 
             "name": "Abc",
             "gender": "FTrue",
             "goals": "Insert goal"
 }
 res.status(201).json(leadboard);
-});
+});*/
 
 
-app.use(statisticsController);
+/*app.use(statisticsController);
 
 app.post('/api/statistics', function(req, res, next) {
     var statistics = { 
@@ -80,11 +98,8 @@ app.post('/api/foodtracks', function(req, res, next) {
      "goals": "Insert goal"
 }
 res.status(201).json(foodtracks);
-});
-// Catch all non-error handler for api (i.e., Not Found)
-app.use('/api/*', function (req, res) {
-    res.status(404).json({ 'message': 'Not Found' });
-});
+});*/
+
 
 // Configuration for serving frontend in production mode
 // Support Vuejs HTML 5 history mode
