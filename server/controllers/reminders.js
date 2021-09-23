@@ -28,4 +28,13 @@ router.get('/api/reminders/:_id',function(req,res,next){
         res.json({"reminders":reminders})
     });
 });
+router.delete('/api/reminders',function(req,res,next){
+    Reminder.deleteMany(function(err,reminders){
+        if(err){
+            return next(err);
+        }
+        res.status(201).json.Reminder;
+    })
+
+})
 module.exports = router;
