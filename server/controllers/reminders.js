@@ -19,4 +19,13 @@ router.get('/api/reminders',function(req,res,next){
         res.json({"reminders":reminders})
     });
 });
+router.get('/api/reminders/:_id',function(req,res,next){
+    id = req.params._id;
+    Reminder.findById(id,function(err,reminders){
+        if(err){
+            return next(err);
+        }
+        res.json({"reminders":reminders})
+    });
+});
 module.exports = router;
