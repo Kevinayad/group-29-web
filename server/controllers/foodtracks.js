@@ -10,5 +10,12 @@ router.post('/api/foodtracks', function(req, res, next) {
     })
     });
 
+    
+        router.get('/api/foodtracks', function(req, res, next) {
+           Foodtrack.find(function(err, foodtracks) {
+            if (err) { return next(err); }
+            res.json({"foodtracks": foodtracks});
+                });
+            });
     module.exports = router;
     
