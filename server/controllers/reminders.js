@@ -9,6 +9,14 @@ router.post('/api/reminders',function(req,res,next){
             return next(err);
         }
         res.status(201).json(reminder);
-    })
-})
+    });
+});
+router.get('/api/reminders',function(req,res,next){
+    Reminder.find(function(err,reminders){
+        if(err){
+            return next(err);
+        }
+        res.json({"reminders":reminders})
+    });
+});
 module.exports = router;
