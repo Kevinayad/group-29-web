@@ -23,7 +23,7 @@ router.get('/api/reminders',function(req,res,next){
 });
 //Get by ID
 router.get('/api/reminders/:_id',function(req,res,next){
-    id = req.params._id;
+    var id = req.params._id;
     Reminder.findById(id,function(err,reminders){
         if(err){
             return next(err);
@@ -32,7 +32,7 @@ router.get('/api/reminders/:_id',function(req,res,next){
     });
 });
 //Delete all
-router.delete('/api/reminders',function(req,res,next){
+router.delete('/api/reminders',function(res,next){
     Reminder.deleteMany(function(err){
         if(err){
             return next(err);
@@ -43,7 +43,7 @@ router.delete('/api/reminders',function(req,res,next){
 });
 //Delete by ID
 router.delete('/api/reminders/:_id',function(req,res,next){
-    id = req.params._id;
+    var id = req.params._id;
     Reminder.findOneAndDelete({_id:id},function(err,reminders){
         if(err){
             return next(err);
@@ -51,5 +51,35 @@ router.delete('/api/reminders/:_id',function(req,res,next){
         res.status(201).json(Reminder);
     });
     
+});
+//Patch funtion
+router.patch('/api/reminders/:_id',function(req,res,next){
+    var id = req.params._id;
+    Reminder.findById(id,function(err,reminders){
+        if(err){
+            return next(err);
+        }
+        if(reminders == null){
+            return res.status(404).json({"message":"Reminder not found"});
+        }
+        reminders.reminderText = (req.body.reminderText || reminders.reminderText);
+        reminders.interval = (req.body.interval || reminders.interval);
+        reminders.save();
+        res.json(reminders);
+
+    });
+});
+//Delete by ID
+router.delete('api/reminders/:_id', function(req,res next){
+    var id = req.params._id;
+    Reminder.findOneAndDelete({_id:id}, function(err,reminders){
+        if(err){
+            return next(err);
+        }
+        if(reminders==null){
+            return res.status(404).json("message":"Reminder not found");
+        }
+        res.json(reminders);
+    });
 });
 module.exports = router;
