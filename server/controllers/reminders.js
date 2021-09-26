@@ -18,7 +18,7 @@ router.get('/api/reminders',function(req,res,next){
         if(err){
             return next(err);
         }
-        res.json({"reminders":reminders})
+        res.json({"reminders":reminders});
     });
 });
 //Get by ID
@@ -32,12 +32,15 @@ router.get('/api/reminders/:_id',function(req,res,next){
     });
 });
 //Delete all
-router.delete('/api/reminders',function(res,next){
-    Reminder.deleteMany(function(err){
+router.delete('/api/reminders',function(req,res,next){
+    Reminder.deleteMany({},function(err,reminders){
         if(err){
             return next(err);
         }
-        res.status(201).json(Reminder);
+        if(reminders==null){
+            return res.status(404).json({"message":"Reminder not found"});
+        }
+        res.json(reminders);
     });
 
 });
