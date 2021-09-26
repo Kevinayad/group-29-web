@@ -70,14 +70,14 @@ router.patch('/api/reminders/:_id',function(req,res,next){
     });
 });
 //Delete by ID
-router.delete('api/reminders/:_id', function(req,res next){
+router.delete('api/reminders/:_id', function(req,res, next){
     var id = req.params._id;
     Reminder.findOneAndDelete({_id:id}, function(err,reminders){
         if(err){
             return next(err);
         }
         if(reminders==null){
-            return res.status(404).json("message":"Reminder not found");
+            return res.status(404).json({"message":"Reminder not found"});
         }
         res.json(reminders);
     });
