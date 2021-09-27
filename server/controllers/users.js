@@ -8,6 +8,14 @@ router.post('/api/users', function(req, res, next) {
         res.status(201).json(user);
     })
     });
+    router.get('/api/users', function(req, res, next) {
+        User.find(function(err, users) {
+            if (err) { return next(err); }
+            res.json({"users": users});
+        });
+    });
+    
+    
 
     
     router.get('/api/users', function(req, res, next) {User.find(function(err, users) {

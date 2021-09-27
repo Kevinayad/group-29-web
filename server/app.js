@@ -80,14 +80,6 @@ res.status(201).json(leadboard);
 
 /*app.use(statisticsController);
 
-app.post('/api/statistics', function(req, res, next) {
-    var statistics = { 
-     "name": "Anna",
-     "gender": "Female",
-     "goals": "Insert goal"
-}
-res.status(201).json(statistics);
-});
 
 app.use(foodtracksController);
 
