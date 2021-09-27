@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var foodtrackSchema = new Schema ({
-    foodName: { type: String},
-    calories: { type: Number},
-    color: { type: String}
-
+    name: { type: String},
+    protien: { type: Number},
+    carbs: { type: Number},
+    fats: { type: Number}
 });
 module.exports = mongoose.model('foodtracks', foodtrackSchema);
 
