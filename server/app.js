@@ -7,6 +7,7 @@ var history = require('connect-history-api-fallback');
 var leadboardsController = require('./controllers/leadboards');
 var statisticsController = require('./controllers/statistics');
 var foodtracksController = require('./controllers/foodtracks');
+var remindersController = require('./controllers/reminders')
 var usersController = require('./controllers/users');
 const bodyParser = require('body-parser');
 const { stat } = require('fs/promises');
@@ -43,6 +44,7 @@ app.use(foodtracksController);
 app.use(usersController);
 app.use(statisticsController);
 app.use(leadboardsController);
+app.use(remindersController);
 
 // Catch all non-error handler for api (i.e., Not Found)
 app.use('/api/*', function (req, res) {

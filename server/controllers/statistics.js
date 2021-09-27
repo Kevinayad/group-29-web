@@ -11,8 +11,8 @@ router.post('/api/statistics', function(req, res, next) {
     });
 });
 // Get all function
-router.get('api/statistics',function(req,res,next){
-    Statistic.find(function(err,reminders){
+router.get('/api/statistics',function(req,res,next){
+    Statistic.find(function(err,statistics){
         if(err){
             return next(err);
         }
@@ -20,7 +20,7 @@ router.get('api/statistics',function(req,res,next){
     });
 });
 // Get by ID function
-router.get('api/statistics/:_id',function(req,res,next){
+router.get('/api/statistics/:_id',function(req,res,next){
     var id = req.params._id;
     Statistic.findById(id,function(err,statistics){
         if(err){
@@ -35,7 +35,7 @@ router.delete('/api/statistics',function(req,res,next){
         if(err){
             return next(err);
         }
-        if(reminders==null){
+        if(statistics==null){
             return res.status(404).json({"message":"Statistic not found"})
         }
         res.json(statistics);
@@ -58,7 +58,7 @@ router.put('/api/statistics/:_id',function(req,res,next){
         if(err){
             return next(err);
         }
-        if (users==null){
+        if (statistics==null){
             return res.status(404).json({"message":"Statistic not found"})
         }
         statistics.name = req.body.name;
