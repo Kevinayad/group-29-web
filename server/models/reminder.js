@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var reminderSchema = new Schema({
     name: {type:String},
     reminderText: {type:String},
-    interval: {type:Number}
-
+    interval: {type:Number},
+    user_id: {type:String}
 })
 module.exports = mongoose.model('reminders',reminderSchema)

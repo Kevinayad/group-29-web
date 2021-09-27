@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var Reminder = require('../models/reminder');
 router.post('/api/users', function(req, res, next) {
     var user = new User(req.body);
              user.save(function(err,users) {
@@ -8,15 +9,39 @@ router.post('/api/users', function(req, res, next) {
         res.status(201).json(user);
     })
     });
+    router.post('/api/users/:_id/reminders', function(req, res, next) {
+        
+        var reminder = new Reminder(req.body);
+        reminder.user_id = req.params._id;
+        reminder.save(function(err, reminder){
+            if(err){
+                return next(err);
+            }
+            res.status(201).json(reminder);
+        })
+        });
     router.get('/api/users', function(req, res, next) {
         User.find(function(err, users) {
             if (err) { return next(err); }
             res.json({"users": users});
         });
     });
+    router.get('/api/users/:_id/reminders', function(req, res, next) {
+        Reminder.find(function(err, reminders) {
+            if (err) { return next(err); }
+            res.json({"reminders": reminders});
+        });
+    });
+    router.get('/api/users/:_id/reminders/:remid', function(req, res, next) {
+        var id = req.params.remid;
+            Reminder.findById(id, function(err, reminders) {
+                if (err) { return next(err); }
+                if (reminders == null) {
+                    return res.status(404).json({"message": "reminder not found"});
+                
+            }});
+    });
     
-    
-
     
     router.get('/api/users', function(req, res, next) {User.find(function(err, users) {
         if (err) { return next(err); }
