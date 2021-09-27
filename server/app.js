@@ -8,6 +8,7 @@ var usersController = require('./controllers/users');
 var leadboardsController = require('./controllers/leadboards');
 var statisticsController = require('./controllers/statistics');
 var foodtracksController = require('./controllers/foodtracks');
+var remindersController = require('./controllers/reminders');
 const { json } = require('body-parser');
 const user = require('./models/user');
 
@@ -53,6 +54,23 @@ app.use(statisticsController);
 
 
 app.use(foodtracksController);
+
+app.post('/api/foodtracks', function(req, res, next) {
+    var foodtracks = { 
+     "name": "Anna",
+     "gender": "Female",
+     "goals": "Insert goal"
+}
+res.status(201).json(foodtracks);
+});
+
+app.use(remindersController);
+
+
+
+
+
+
 
 // Catch all non-error handler for api (i.e., Not Found)
 app.use('/api/*', function (req, res) {
