@@ -10,6 +10,7 @@ var statisticsController = require('./controllers/statistics');
 var foodtracksController = require('./controllers/foodtracks');
 var remindersController = require('./controllers/reminders');
 const { json } = require('body-parser');
+const user = require('./models/user');
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/Pythion';
@@ -47,44 +48,10 @@ app.get('/api', function(req, res) {
 
 app.use(usersController);
 
-app.get('/users', function(req, res, next) {
-    User.find(function(err, users) {
-        if (err) { return next(err); }
-        res.json({"users": users});
-    });
-});
-
-app.post('/api/users', function(req, res, next) {
-    var user = { 
-     "name": "Anna",
-     "gender": "Female",
-     "goals": "Insert goal"
-}
-res.status(201).json(user);
-});
-
 app.use(leadboardsController);
-
-app.post('/api/leadboards', function(req, res, next) {
-           var leadboard = { 
-            "name": "Abc",
-            "gender": "FTrue",
-            "goals": "Insert goal"
-}
-res.status(201).json(leadboard);
-});
-
 
 app.use(statisticsController);
 
-app.post('/api/statistics', function(req, res, next) {
-    var statistics = { 
-     "name": "Anna",
-     "gender": "Female",
-     "goals": "Insert goal"
-}
-res.status(201).json(statistics);
-});
 
 app.use(foodtracksController);
 
