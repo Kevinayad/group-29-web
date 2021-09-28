@@ -39,7 +39,8 @@ router.post('/api/users', function(req, res, next) {
                 if (reminders == null) {
                     return res.status(404).json({"message": "reminder not found"});
                 
-            }});
+            } res.json({"reminders": reminders});});
+            
     });
     
     
