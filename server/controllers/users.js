@@ -42,7 +42,16 @@ router.post('/api/users', function(req, res, next) {
             } res.json({"reminders": reminders});});
             
     });
-    
+    router.delete('/api/users/:_id/reminders/:remid', function(req, res, next) {
+        var id = req.params.remid;
+            Reminder.findOneAndDelete(id, function(err, reminders) {
+                if (err) { return next(err); }
+                if (reminders == null) {
+                    return res.status(404).json({"message": "reminder not found"});
+                
+            } res.json({"reminders": reminders});});
+            
+    });
     
     router.get('/api/users', function(req, res, next) {User.find(function(err, users) {
         if (err) { return next(err); }
