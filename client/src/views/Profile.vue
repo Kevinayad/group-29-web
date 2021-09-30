@@ -1,7 +1,6 @@
 <template>
-
-  <div>
-<router-link to="/profile">Profile</router-link>
+  <div id = "profile-content">
+    <h2> New post</h2>
   </div>
 </template>
 
@@ -10,7 +9,7 @@
 import { Api } from '@/Api'
 
 export default {
-  name: 'home',
+  name: 'profile',
   data() {
     return {
       message: 'none'
@@ -31,8 +30,9 @@ export default {
 </script>
 
 <style>
-.btn_message {
-  margin-bottom: 1em;
+#profile-content {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  position: center;
 }
 
 </style>
