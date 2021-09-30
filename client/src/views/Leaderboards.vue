@@ -1,6 +1,7 @@
-<template>
-  <div id="content">
-<h2> Hi everyone </h2>
+template>
+
+  <div>
+
   </div>
 </template>
 
@@ -30,9 +31,8 @@ export default {
 </script>
 
 <style>
-#content {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  position: center;
+.btn_message {
+  margin-bottom: 1em;
 }
 
 </style>
