@@ -1,87 +1,1637 @@
 {
 	"info": {
-		"_postman_id": "410ded95-01c4-45a2-b244-f4cea28e4189",
+		"_postman_id": "19a6a6ac-239d-4876-a11b-dadd5c6b0250",
 		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "GET /api",
-			"event": [
+			"name": "Reminders",
+			"item": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api",
-					"host": [
-						"{{host}}"
+					"name": "post/api/reminder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set('reminderid', jsonData._id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(201);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"path": [
-						"api"
-					]
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Dunnis\",\r\n    \"reminderText\":\"Test reminder3\",\r\n    \"interval\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/reminders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reminders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/api/reminders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/reminders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reminders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/api/reminders/_id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/reminders/{{reminderid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reminders",
+								"{{reminderid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch/api/reminders/_id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reminderText\":\"Patched text\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/reminders/{{reminderid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reminders",
+								"{{reminderid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "del/api/reminders/_id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/reminders/{{reminderid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reminders",
+								"{{reminderid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "del/api/reminders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/reminders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reminders"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "POST/api/user",
-			"event": [
+			"name": "Statistics",
+			"item": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n \"id\": 2,\n \"role\": \"Admin\"\n \n }"
-				},
-				"url": {
-					"raw": "{{host}}/api/users",
-					"host": [
-						"{{host}}"
+					"name": "post/api/statistics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set('statisticsid', jsonData._id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(201);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"path": [
-						"api",
-						"users"
-					]
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Testname\",\r\n    \"gender\":\"male\",\r\n    \"goals\":\"testgoal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/statistics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/api/statistics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/statistics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/api/statistics/_id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/statistics/{{statisticsid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"{{statisticsid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put/api/statistics/_id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Testnamereplaced\",\r\n    \"gender\":\"malereplaced\",\r\n    \"goals\":\"testgoalreplaced\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/statistics/{{statisticsid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"{{statisticsid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "del/api/statistics/_id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/statistics/{{statisticsid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"{{statisticsid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "del/api/statistics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/statistics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "post/api/users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"userid\", jsonData._id);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"name\": \"Admin\",\n            \"gender\": \"Female\",\n            \"height\": \"173\",\n            \"weight\": \"90\",\n            \"goals\": \"Insert goals\"\n            }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/api/users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/api/users/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{userid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put/api/users/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{userid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch/api/users/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{userid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "del/api/users/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{userid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "del/api/users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Foodtracks",
+			"item": [
+				{
+					"name": "post/api/foodtracks",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"foodtrackid\", jsonData._id);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"name\": \"chicken\",\n            \"protien\": 10,\n            \"carbs\": 11,\n            \"fats\": 10\n            \n            }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/foodtracks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"foodtracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/foodtracks",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/foodtracks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"foodtracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/api/foodtracks/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/foodtracks/{{foodtrackid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"foodtracks",
+								"{{foodtrackid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put/api/foodtracks/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\"name\": \"beef\",\n    \"protien\": 30,\n    \"carbs\": 0,\n    \"fats\": 11}"
+						},
+						"url": {
+							"raw": "{{host}}/api/foodtracks/{{foodtrackid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"foodtracks",
+								"{{foodtrackid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch/api/foodtracks/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"protien\" : 10,\n    \"fats\" : 11\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/foodtracks/{{foodtrackid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"foodtracks",
+								"{{foodtrackid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "del/api/foodtracks/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/foodtracks/{{foodtrackid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"foodtracks",
+								"{{foodtrackid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "del/api/foodtracks",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/foodtracks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"foodtracks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Leaderboards",
+			"item": [
+				{
+					"name": "POST/api/leadboards",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(201);\r",
+									"})\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"leaderboardid\", jsonData._id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Anna\",\n    \"Ranking\": \"1\",\n    \"Points\": \"15\"\n }"
+						},
+						"url": {
+							"raw": "{{host}}/api/leadboards",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"leadboards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET/api/leadboards",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Admin\",\n    \"Ranking\": \"Female\",\n    \"Points\": \"Insert goal\"\n \n }"
+						},
+						"url": {
+							"raw": "{{host}}/api/leadboards",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"leadboards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET/api/leadboards/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Anna\",\n    \"Ranking\": \"1\",\n    \"Points\": \"15\"\n \n }"
+						},
+						"url": {
+							"raw": "{{host}}/api/leadboards/{{leaderboardid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"leadboards",
+								"{{leaderboardid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH/api/leadboards/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Anna\",\n    \"Ranking\": \"1\",\n    \"Points\": \"15\"\n }"
+						},
+						"url": {
+							"raw": "{{host}}/api/leadboards/{{leaderboardid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"leadboards",
+								"{{leaderboardid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT/api/leadboards/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Anna\",\n    \"Ranking\": \"1\",\n    \"Points\": \"15\"\n }"
+						},
+						"url": {
+							"raw": "{{host}}/api/leadboards/{{leaderboardid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"leadboards",
+								"{{leaderboardid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE/api/leadboards/_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Admin\",\n    \"gender\": \"Female\",\n    \"goals\": \"Insert goal\"\n \n }"
+						},
+						"url": {
+							"raw": "{{host}}/api/leadboards/{{leaderboardid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"leadboards",
+								"{{leaderboardid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE/api/leadboards",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Admin\",\n    \"gender\": \"Female\",\n    \"goals\": \"Insert goal\"\n \n }"
+						},
+						"url": {
+							"raw": "{{host}}/api/leadboards",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"leadboards"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
