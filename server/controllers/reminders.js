@@ -51,7 +51,7 @@ router.delete('/api/reminders/:_id',function(req,res,next){
         if(err){
             return next(err);
         }
-        res.status(201).json(reminders);
+        res.json(reminders);
     });
     
 });
