@@ -7,11 +7,11 @@
       <div class="col-sm">
         <form @submit.prevent="submit">
           <div class="form-group">
-            <label for="exampleInputEmail1">Username</label>
+            <label for="exampleInputuser">Username</label>
             <input
               type="username"
               class="form-control"
-              id="username"
+              id="username1"
               aria-describedby="emailHelp"
               placeholder="Username"
               required
@@ -68,9 +68,20 @@
             </select>
           </div>
           <div class="submitForm">
-            <button type="text" class="submit">Submit</button>
+            <button type="text" value="send">Submit</button>
           </div>
         </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <button v-on:click="getUser()" value="recieve" type="text">get List of users:</button>
+      </div>
+      <div class="col-sm">
+        <p>
+          List of users:<br />
+          {{ foodtracks }}
+        </p>
       </div>
     </div>
   </div>
@@ -79,7 +90,6 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-
 export default {
   data() {
     return {
@@ -91,6 +101,16 @@ export default {
     }
   },
   methods: {
+    getUser() {
+      Api.get('/foodtracks')
+        .then((response) => {
+          this.foodtracks = response.data
+          console.log(response.data)
+        })
+        .catch((error) => {
+          this.foodtracks = error
+        })
+    },
     submit() {
       Api.post('/users', {
         name: this.name,
@@ -111,11 +131,13 @@ export default {
 </script>
 
 <style>
+#title-between {
+  margin-top: 10px;
+}
 .btn_message {
   margin-bottom: 1em;
 }
 #navbar {
   color: black;
 }
-
 </style>
