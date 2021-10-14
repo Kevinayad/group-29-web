@@ -39,28 +39,6 @@
               v-model="statistic.timespan"
             />
           </div>
-          <div class="form-group">
-            <label for="name">Users name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              placeholder="Include user in statistic"
-              required
-              v-model="user.name"
-            />
-          </div>
-          <div class="form-group">
-            <label for="goal">Users goal</label>
-            <input
-              type="text"
-              class="form-control"
-              id="goal"
-              placeholder="Include goal in statistic"
-              required
-              v-model="user.goal"
-            />
-          </div>
            <b-button
             class="mb-2 mr-2 mb-sm-0"
             variant="primary"
@@ -112,10 +90,6 @@ export default {
       statistic: {
         type: '',
         timespan: ''
-      },
-      user: {
-        name: '',
-        goal: ''
       },
       show: true
     }
