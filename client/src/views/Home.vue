@@ -73,13 +73,23 @@
         </form>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm">
+        <button v-on:click="getFood()" value="recieve" type="text">get List of foods:</button>
+      </div>
+      <div class="col-sm">
+        <p>
+          List of foods:<br />
+          {{ foodtracks }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-
 export default {
   data() {
     return {
@@ -91,6 +101,16 @@ export default {
     }
   },
   methods: {
+    getFood() {
+      Api.get('/foodtracks')
+        .then((response) => {
+          this.foodtracks = response.data
+          console.log(response.data)
+        })
+        .catch((error) => {
+          this.foodtracks = error
+        })
+    },
     submit() {
       Api.post('/users', {
         name: this.name,
@@ -111,6 +131,9 @@ export default {
 </script>
 
 <style>
+#title-between {
+  margin-top: 10px;
+}
 .btn_message {
   margin-bottom: 1em;
 }
