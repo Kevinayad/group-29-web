@@ -7,11 +7,11 @@
       <div class="col-sm">
         <form @submit.prevent="submit">
           <div class="form-group">
-            <label for="exampleInputuser">Username</label>
+            <label for="exampleInputEmail1">Username</label>
             <input
               type="username"
               class="form-control"
-              id="username1"
+              id="username"
               aria-describedby="emailHelp"
               placeholder="Username"
               required
@@ -68,7 +68,7 @@
             </select>
           </div>
           <div class="submitForm">
-            <button type="text" value="send">Submit</button>
+            <button type="text" class="submit">Submit</button>
           </div>
         </form>
       </div>
@@ -140,4 +140,5 @@ export default {
 #navbar {
   color: black;
 }
+
 </style>

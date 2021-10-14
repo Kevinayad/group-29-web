@@ -13,13 +13,34 @@ router.post('/api/reminders',function(req,res,next){
     });
 });
 //Get all
-router.get('/api/reminders',function(req,res,next){
+/*router.get('/api/reminders',function(req,res,next){
     Reminder.find(function(err,reminders){
         if(err){
             return next(err);
         }
         res.json({"reminders":reminders});
     });
+});*/
+router.get('/api/reminders',function(req,res,next){
+    var filterInterval = req.query.interval;
+    console.log(filterInterval);
+    if(filterInterval!=null){
+        Reminder.find({interval:filterInterval},function(err, reminders){
+            if(err){
+               return next(err);
+            }
+            res.json({"reminders":reminders})
+        })
+    }else{
+        Reminder.find(function(err,reminders){
+            if(err){
+                return next(err);
+            }
+            res.json({"reminders":reminders});
+        });
+    }
+    
+    
 });
 //Get by ID
 router.get('/api/reminders/:_id',function(req,res,next){
@@ -51,7 +72,7 @@ router.delete('/api/reminders/:_id',function(req,res,next){
         if(err){
             return next(err);
         }
-        res.status(201).json(reminders);
+        res.json(reminders);
     });
     
 });
