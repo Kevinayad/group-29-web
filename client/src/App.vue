@@ -11,7 +11,10 @@
         <a class="nav-link" href="#">Leaderboards</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">Reminders</a>
+        <a class="nav-link" href="/reminders">Reminders</a>
+      </li>
+      <li class="nav-item active">
+            <a class="nav-link" href="#"><router-link to="getusers">getAllUsers</router-link></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#">Food tracker</a>
@@ -23,7 +26,7 @@
   </div>
   </nav>
     <!-- Render the content of the current page view -->
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
