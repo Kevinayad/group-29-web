@@ -75,11 +75,11 @@
     </div>
     <div class="row">
       <div class="col-sm">
-        <button v-on:click="getUser()" value="recieve" type="text">get List of users:</button>
+        <button v-on:click="getFood()" value="recieve" type="text">get List of foods:</button>
       </div>
       <div class="col-sm">
         <p>
-          List of users:<br />
+          List of foods:<br />
           {{ foodtracks }}
         </p>
       </div>
@@ -101,7 +101,7 @@ export default {
     }
   },
   methods: {
-    getUser() {
+    getFood() {
       Api.get('/foodtracks')
         .then((response) => {
           this.foodtracks = response.data
