@@ -26,18 +26,13 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      name: '',
-      gender: '',
-      height: '',
-      weight: '',
-      goals: ''
+      users: []
     }
   },
   methods: {
     async getusers() {
       const response = await Api.get('/users', {})
       console.log(response)
-      this.users = response
     },
     getuser() {
       axios
