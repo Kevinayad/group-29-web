@@ -5,6 +5,7 @@ import Profile from './views/Profile.vue'
 import Leaderboard from './views/Leaderboards.vue'
 import Statistic from './views/Statistics.vue'
 import EditStatistic from './views/EditStatistics.vue'
+import Reminder from './views/Reminders.vue'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/statistics/:id/edit',
       name: 'edit-statistics',
       component: EditStatistic
+    },
+    {
+      path: '/reminders',
+      name: 'reminders',
+      component: Reminder
     }
   ]
 })
