@@ -43,7 +43,8 @@ export default new Router({
       path: '/reminders',
       name: 'reminders',
       component: Reminder
-    },{
+    },
+    {
       path: '/getusers',
       name: 'getusers',
       component: getAllUsers
