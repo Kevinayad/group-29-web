@@ -92,7 +92,7 @@ export default {
   },
   mounted() {
     // Load the real recipes from the server
-    Api.get('/users/:id/statistics')
+    Api.get('/statistics')
       .then(response => {
         this.statistics = response.data
         console.log(response.data)
