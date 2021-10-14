@@ -10,9 +10,20 @@ router.post('/api/leadboards', function(req, res, next) {
         res.status(201).json(leadboards);
         })
     });
-    router.get('/api/leadboards', function(req, res, next) {Leadboard.find(function(err, leadboards) {
-        if (err) { return next(err); }
-        res.json({"leadboards": leadboards});});});
+/*router.get('/api/leadboards', function(req, res, next) {Leadboard.find(function(err, leadboards) {
+    if (err) { return next(err); }
+    res.json({"leadboards": leadboards});
+    });
+});*/
+router.get('/api/leadboards', function(req, res, next) {
+    Leadboard.find(function(err, leadboards) {
+        if (err) {
+            return next(err); 
+        }
+        leadboards.sort((a,b)=>(a.Points<b.Points)?1:-1);
+        res.json({"leadboards": leadboards});
+    });
+});
     
 //Get leaderboard with a certain id
 router.get('/api/leadboards/:_id', function(req, res, next) {                var id = req.params._id;
@@ -24,9 +35,10 @@ router.get('/api/leadboards/:_id', function(req, res, next) {                var
         res.json(leadboards);
     });
 });
-    
+
+
             
-//Put fucntion by id
+//Put function by id
 router.put('/api/leadboards/:_id', function (req, res, next) {
     var id = req.params._id;
     Leadboard.findById(id, function (err, leadboards) {
