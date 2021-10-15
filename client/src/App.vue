@@ -5,13 +5,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Users</a>
+            <a class="nav-link" href="#"><router-link to="/">Users</router-link></a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="#">Leaderboards</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#"><router-link to="getusers">getAllUsers</router-link></a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="#">Reminders</a>
