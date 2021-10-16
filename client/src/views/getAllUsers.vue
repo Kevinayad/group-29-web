@@ -7,57 +7,63 @@
     </div>
     <div class="row">
       <div class="col-sm">
-        <div v-for="users in users" :key="users.id">
-          <h3>{{ users.id }}. {{ users.name }}</h3>
+        <div v-for="user in users" v-bind:key="user._id">
+          <p>{{ user._id }} {{ user.name }}</p>
         </div>
-        <p>
-          List of users:<br />
-          {{ users }}
-        </p>
+        <div class="row">
+          <div class="col-sm">
+            <input v-model="usrid" placeholder="Enter user id:" />
+          </div>
+          <div class="col-sm">
+            <b-button v-on:click="getuserbyID(usrid)">get user by id:</b-button>
+          </div>
+          <div class="col-sm">
+          <div v-if="users._id===usrid">
+            <p>{{ users }}</p>
+          </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <!-- <p>
+          List of users:<br />
+          {{ users }}
+        </p> -->
 </template>
 
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-import axios from 'axios'
 export default {
   data() {
     return {
-      users: []
+      users: { name: '', gender: '', height: '', weight: '', goals: '' }
     }
   },
   methods: {
     async getusers() {
       const response = await Api.get('/users', {})
-      console.log(response)
+      console.log(response.data)
     },
     getuser() {
-      axios
-        .get('http://localhost:3000/api/users')
+      Api.get('/users')
         .then((response) => {
-          console.log(response.data)
-          this.users = response.data
+          console.log(response.data.users)
+          this.users = response.data.users
         })
         .catch((error) => {
           this.users = error
         })
     },
-    submit() {
-      Api.post('/users', {
-        name: this.name,
-        gender: this.gender,
-        height: this.height,
-        weight: this.weight,
-        goals: this.goals
-      })
+    getuserbyID(userI) {
+      Api.get('/users/' + userI)
         .then((response) => {
-          alert('User registered')
+          this.users = response.data
+          console.log(response.data)
         })
         .catch((error) => {
-          alert(error)
+          this.users = error
         })
     }
   }

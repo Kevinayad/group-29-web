@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm"><h1>Users registration page</h1></div>
+      <div class="col-sm"><h5><router-link to="getusers" id="listUsers">List of all users</router-link></h5></div>
     </div>
     <div class="row">
       <div class="col-sm">
@@ -68,20 +69,9 @@
             </select>
           </div>
           <div class="submitForm">
-            <button type="text" class="submit">Submit</button>
+            <b-button type="text" value="send">Submit</b-button>
           </div>
         </form>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm">
-        <button v-on:click="getFood()" value="recieve" type="text">get List of foods:</button>
-      </div>
-      <div class="col-sm">
-        <p>
-          List of foods:<br />
-          {{ foodtracks }}
-        </p>
       </div>
     </div>
   </div>
@@ -140,5 +130,7 @@ export default {
 #navbar {
   color: black;
 }
-
+#listUsers{
+  color: red;
+}
 </style>
