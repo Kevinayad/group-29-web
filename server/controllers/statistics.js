@@ -48,7 +48,7 @@ router.delete('/api/statistics/:_id',function(req,res,next){
         if(err){
             return next(err);
         }
-        res.status(201).json(statistics);
+        res.json(statistics);
     });
 });
 // Put function

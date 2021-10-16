@@ -8,11 +8,11 @@
       <div class="col-sm">
         <form @submit.prevent="submit">
           <div class="form-group">
-            <label for="exampleInputuser">Username</label>
+            <label for="exampleInputEmail1">Username</label>
             <input
               type="username"
               class="form-control"
-              id="username1"
+              id="username"
               aria-describedby="emailHelp"
               placeholder="Username"
               required

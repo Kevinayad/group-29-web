@@ -35,14 +35,10 @@
   text-align: left;
   color: #2c3e50;
 }
-#nav {
-  color: aqua;
+#nav{
+  color: aqua ;
 }
-template {
+template{
   background-color: black;
-}
-.nav-link {
-  color: #2c3e50;
-  text-underline-offset: off;
 }
 </style>
