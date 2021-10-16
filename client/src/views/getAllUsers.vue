@@ -18,7 +18,9 @@
             <b-button v-on:click="getuserbyID(usrid)">get user by id:</b-button>
           </div>
           <div class="col-sm">
+          <div v-if="users._id===usrid">
             <p>{{ users }}</p>
+          </div>
           </div>
         </div>
       </div>
@@ -36,8 +38,7 @@ import { Api } from '@/Api'
 export default {
   data() {
     return {
-      users: { name: '', gender: '', height: '', weight: '', goals: '' },
-      usersid: { name: '', gender: '', height: '', weight: '', goals: '' }
+      users: { name: '', gender: '', height: '', weight: '', goals: '' }
     }
   },
   methods: {
@@ -58,8 +59,8 @@ export default {
     getuserbyID(userI) {
       Api.get('/users/' + userI)
         .then((response) => {
-          this.users = response.data.users
-          console.log(response.data.users)
+          this.users = response.data
+          console.log(response.data)
         })
         .catch((error) => {
           this.users = error
