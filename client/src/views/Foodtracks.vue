@@ -17,8 +17,8 @@
             <input v-model="protien" placeholder="Enter protien content:" />
           </div>
           <div class="col-sm">
-            <b-button v-on:click="putFoodbyID(foodid)"
-              >get food by id:</b-button
+            <b-button v-on:click="patchFoodbyID(foodid)"
+              >edit food by id:</b-button
             >
           </div>
           <div class="col-sm">
@@ -56,7 +56,7 @@ export default {
           this.foodtracks = error
         })
     },
-    putFoodbyID(foodI) {
+    patchFoodbyID(foodI) {
       Api.patch('/foodtracks/' + foodI, {
         protien: this.protien,
         fats: this.fats

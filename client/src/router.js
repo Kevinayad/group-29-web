@@ -26,7 +26,7 @@ export default new Router({
       component: Profile
     },
     {
-      path: '/',
+      path: '/leaderboards',
       name: 'leaderboards',
       component: Leaderboard
     },

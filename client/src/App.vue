@@ -10,7 +10,7 @@
             >
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Leaderboards</a>
+            <a class="nav-link" href="#"><router-link to="/leaderboards">Leaderboards</router-link></a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="#"><router-link to="/reminders">Reminders</router-link></a>
