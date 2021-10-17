@@ -13,7 +13,7 @@
             <a class="nav-link" href="#">Leaderboards</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Reminders</a>
+            <a class="nav-link" href="#"><router-link to="/reminders">Reminders</router-link></a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="#"><router-link to="/foodtracks">Foodtracks</router-link></a>
