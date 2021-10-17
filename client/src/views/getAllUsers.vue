@@ -18,7 +18,7 @@
             <b-button v-on:click="getuserbyID(usrid)">get user by id:</b-button>
           </div>
           <div class="col-sm">
-          <div v-if="users._id===usrid">
+          <div v-if="usrid!==0">
             <p>{{ users }}</p>
           </div>
           </div>

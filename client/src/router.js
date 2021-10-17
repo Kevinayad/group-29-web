@@ -7,6 +7,7 @@ import Statistic from './views/Statistics.vue'
 import EditStatistic from './views/EditStatistics.vue'
 import Reminder from './views/Reminders.vue'
 import getAllUsers from './views/getAllUsers.vue'
+import foodtracks from './views/Foodtracks.vue'
 
 Vue.use(Router)
 
@@ -48,6 +49,12 @@ export default new Router({
       path: '/getusers',
       name: 'getusers',
       component: getAllUsers
+    }, {
+
+      path: '/foodtracks',
+      name: 'foodtracks',
+      component: foodtracks
     }
+
   ]
 })

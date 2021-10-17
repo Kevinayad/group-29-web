@@ -16,7 +16,7 @@
             <a class="nav-link" href="#">Reminders</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Food tracker</a>
+            <a class="nav-link" href="#"><router-link to="/foodtracks">Foodtracks</router-link></a>
           </li>
         </ul>
       </div>
