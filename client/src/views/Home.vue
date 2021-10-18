@@ -3,6 +3,8 @@
     <div class="row">
       <div class="col-sm"><h1>Users registration page</h1></div>
       <div class="col-sm"><h5><router-link to="getusers" id="listUsers">List of all users</router-link></h5></div>
+      <div class="col-sm"><h5><router-link to="getuserrem">list user specific reminders</router-link></h5></div>
+      <div class="col-sm"><h5><router-link to="postuserrem">add user specific reminders</router-link></h5></div>
     </div>
     <div class="row">
       <div class="col-sm">

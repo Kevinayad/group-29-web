@@ -8,7 +8,8 @@ import EditStatistic from './views/EditStatistics.vue'
 import Reminder from './views/Reminders.vue'
 import getAllUsers from './views/getAllUsers.vue'
 import foodtracks from './views/Foodtracks.vue'
-
+import getuserrem from './views/getUserReminders.vue'
+import postuserrem from './views/postReminderuserbyid.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -54,6 +55,16 @@ export default new Router({
       path: '/foodtracks',
       name: 'foodtracks',
       component: foodtracks
+    }, {
+
+      path: '/getuserrem',
+      name: 'getuserrem',
+      component: getuserrem
+    }, {
+
+      path: '/postuserrem',
+      name: 'postserrem',
+      component: postuserrem
     }
 
   ]
