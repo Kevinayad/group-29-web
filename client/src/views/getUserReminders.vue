@@ -21,7 +21,7 @@
             >
           </div>
           <div class="col-sm">
-            <p>{{ reminders }}</p>
+            <p class="reminderList">{{ reminders }}</p>
           </div>
         </div>
       </div>
@@ -81,5 +81,8 @@ export default {
 }
 #navbar {
   color: black;
+}
+.reminderList{
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 </style>

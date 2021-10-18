@@ -2,15 +2,35 @@
   <div class="container">
     <div class="row">
       <div class="col-sm"><h1>Users registration page</h1></div>
-      <div class="col-sm"><h5><router-link to="getusers" id="listUsers">List of all users</router-link></h5></div>
-      <div class="col-sm"><h5><router-link to="getuserrem">list user specific reminders</router-link></h5></div>
-      <div class="col-sm"><h5><router-link to="postuserrem">add user specific reminders</router-link></h5></div>
+      <div class="col-sm">
+        <h5>
+          <router-link to="getusers" id="listUsers"
+            >List of all users</router-link
+          >
+        </h5>
+      </div>
+      <div class="col-sm">
+        <h5>
+          <router-link to="getuserrem" id="listReminders"
+            >list user specific reminders</router-link
+          >
+        </h5>
+      </div>
+      <div class="col-sm">
+        <h5>
+          <router-link to="postuserrem"
+            >add user specific reminders</router-link
+          >
+        </h5>
+      </div>
     </div>
     <div class="row">
       <div class="col-sm">
         <form @submit.prevent="submit">
           <div class="form-group">
-            <label for="exampleInputEmail1">Username</label>
+            <label class="userInput" for="exampleInputEmail1"
+              >Username</label
+            >
             <input
               type="username"
               class="form-control"
@@ -132,7 +152,17 @@ export default {
 #navbar {
   color: black;
 }
-#listUsers{
+#listUsers {
   color: red;
+}
+#listReminders {
+  color: darkgreen;
+}
+label {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+label.userInput {
+  font-family:monospace;
 }
 </style>

@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-sm">
         <div v-for="food in foodtracks" v-bind:key="food._id">
-          <p>{{ food }}</p>
+          <p class="foodres">{{ food }}</p>
         </div>
         <div class="row">
           <div class="col-sm">
@@ -81,5 +81,8 @@ export default {
 }
 #navbar {
   color: black;
+}
+.foodres{
+  color: green;
 }
 </style>

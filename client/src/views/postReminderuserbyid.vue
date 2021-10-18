@@ -12,10 +12,10 @@
         </div>
         <div class="row">
           <div class="col-sm">
-            <input v-model="usrid" placeholder="Enter user id:" />
-            <input v-model="name" placeholder="Enter reminder name:" />
-            <input v-model="reminderText" placeholder="Enter reminder text:" />
-            <input v-model="interval" placeholder="Enter reminder interval:" />
+            <input class="inputtext" v-model="usrid" placeholder="Enter user id:" />
+            <input class="inputtext" vv-model="name" placeholder="Enter reminder name:" />
+            <input class="inputtext" vv-model="reminderText" placeholder="Enter reminder text:" />
+            <input class="inputtext" vv-model="interval" placeholder="Enter reminder interval:" />
           </div>
           <div class="col-sm">
             <b-button v-on:click="postReminderUserbyID(usrid)"
@@ -23,7 +23,7 @@
             >
           </div>
           <div class="col-sm">
-            <p>{{ reminders }}</p>
+            <p class="result">{{ reminders }}</p>
           </div>
         </div>
       </div>
@@ -86,7 +86,14 @@ export default {
 .btn_message {
   margin-bottom: 1em;
 }
+.inputtext{
+  color: black;
+}
 #navbar {
   color: black;
+}
+.result{
+color: crimson;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 </style>

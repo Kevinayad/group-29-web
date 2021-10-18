@@ -19,7 +19,7 @@
           </div>
           <div class="col-sm">
           <div v-if="usrid!==0">
-            <p>{{ users }}</p>
+            <p class="userresult">{{ users }}</p>
           </div>
           </div>
         </div>
@@ -64,6 +64,7 @@ export default {
         })
         .catch((error) => {
           this.users = error
+          console.log(error)
         })
     }
   }
@@ -79,5 +80,8 @@ export default {
 }
 #navbar {
   color: black;
+}
+.userresult{
+  color: dimgrey;
 }
 </style>
