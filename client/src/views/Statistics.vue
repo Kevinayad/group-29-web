@@ -4,12 +4,7 @@
     <div id= "headline">
     <h3>List of all Statistics:</h3>
     <p v-for="(statistic,index) in statistics" :key="index">{{ statistic }}</p>
-    </div>
-    <b-row align-h="center">
-      <b-col cols="12" sm="6" md="4" v-for="statistic in statistics" v-bind:key="statistic._id">
-        <statistic-item v-bind:statistic="statistic" v-on:del-statistic="deleteStatistic"/>
-      </b-col>
-    </b-row>
+          </div>
     <div id="addNewStatistic">
       <div class="col-sm"><h1>Create new Statistic</h1></div>
     </div>
@@ -25,7 +20,7 @@
               aria-describedby="emailHelp"
               placeholder="Enter diagram type (pie chart / bar chart / line graph)"
               required
-              v-model="statistic.type"
+              v-model="type"
             />
           </div>
           <div class="form-group">
@@ -36,19 +31,13 @@
               id="timespan"
               placeholder="How long time should be included in diagram"
               required
-              v-model="statistic.timespan"
+              v-model="timespan"
             />
           </div>
-           <b-button
-            class="mb-2 mr-2 mb-sm-0"
-            variant="primary"
-            v-on:click="addUser">Add user</b-button>
           <div class="submitForm">
             <button type="text" class="submit">Submit</button>
           </div>
         </form><br>
-<b-button variant ="primary" onclick="location.href='/statistics/:id/edit'" type="button">
-        Edit statistic</b-button>
       </div>
     </div>
   </div>
@@ -57,16 +46,10 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-import StatisticItem from '../components/StatisticItem.vue'
 
 export default {
-  components: { StatisticItem },
-  name: 'statistics',
   created() {
     this.statisticId = this.$route.params.id
-  },
-  Components: {
-    StatisticItem
   },
   mounted() {
     // Load the real recipes from the server
@@ -95,17 +78,6 @@ export default {
     }
   },
   methods: {
-    deleteStatistic(id) {
-      Api.delete(`/statistics/${id}`)
-        .then(reponse => {
-          const index = this.statistics.findIndex(statistic => statistic._id === id)
-          this.statistics.splice(index, 1)
-        })
-        .catch(error => {
-          this.message = error.message
-          console.error(error)
-        })
-    },
     deleteAllStatistic() {
       Api.delete('/statistics')
         .then(response => {
@@ -138,24 +110,6 @@ export default {
         .then(() => {
           // make input boxes empty
         })
-    },
-    addUser() {
-      const id = this.statistic.id
-      if (id != null && this.user.name && this.user.goal) {
-        console.log(id)
-        Api.post(`/statistics/${id}/users`, this.user)
-          .then(response => {
-            alert('User added')
-            console.log(response.data)
-            // window.location.reload()
-          })
-          .catch(error => {
-            this.message = error.message
-            console.error(error)
-          })
-          .then(() => {
-          })
-      }
     }
   }
 }
