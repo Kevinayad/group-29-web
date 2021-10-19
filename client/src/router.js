@@ -4,7 +4,6 @@ import Home from './views/Home.vue'
 import Profile from './views/Profile.vue'
 import Leaderboard from './views/Leaderboards.vue'
 import Statistic from './views/Statistics.vue'
-import EditStatistic from './views/EditStatistics.vue'
 import Reminder from './views/Reminders.vue'
 import getAllUsers from './views/getAllUsers.vue'
 import foodtracks from './views/Foodtracks.vue'
@@ -32,14 +31,9 @@ export default new Router({
       component: Leaderboard
     },
     {
-      path: '/users/:id/statistics',
+      path: '/statistics',
       name: 'statistics',
       component: Statistic
-    },
-    {
-      path: '/statistics/:id/edit',
-      name: 'edit-statistics',
-      component: EditStatistic
     },
     {
       path: '/reminders',
