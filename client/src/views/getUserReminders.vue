@@ -8,7 +8,9 @@
     <div class="row">
       <div class="col-sm">
         <div v-for="user in users" v-bind:key="user._id">
+          <div v-if="user!=0">
           <p>{{ user._id }} {{ user.name }}</p>
+          </div>
         </div>
         <div class="row">
           <div class="col-sm">
@@ -21,7 +23,7 @@
             >
           </div>
           <div class="col-sm">
-            <p class="reminderList">{{ reminders }}</p>
+            <p class="reminderList">Reminder text: {{ reminders.reminderText }}<br> Reminder interval: {{reminders.interval}}</p>
           </div>
         </div>
       </div>
@@ -61,8 +63,8 @@ export default {
     getReminderUserbyID(userI, remid) {
       Api.get('/users/' + userI + '/reminders/' + remid)
         .then((response) => {
-          this.reminders = response.data
-          console.log(response.data)
+          this.reminders = response.data.reminders
+          console.log(response.data.reminders)
         })
         .catch((error) => {
           this.reminders = error

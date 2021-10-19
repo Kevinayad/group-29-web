@@ -41,7 +41,5 @@
 template{
   background-color: black;
 }
-.homepage{
-  color: purple;
-}
+
 </style>

@@ -12,18 +12,31 @@
         </div>
         <div class="row">
           <div class="col-sm">
-            <input class="inputtext" v-model="usrid" placeholder="Enter user id:" />
-            <input class="inputtext" vv-model="name" placeholder="Enter reminder name:" />
-            <input class="inputtext" vv-model="reminderText" placeholder="Enter reminder text:" />
-            <input class="inputtext" vv-model="interval" placeholder="Enter reminder interval:" />
+            <input
+              class="inputtext"
+              v-model="usrid"
+              placeholder="Enter user id:"
+            />
+            <input
+              class="inputtext"
+              vv-model="name"
+              placeholder="Enter reminder name:"
+            />
+            <input
+              class="inputtext"
+              vv-model="reminderText"
+              placeholder="Enter reminder text:"
+            />
+            <input
+              class="inputtext"
+              vv-model="interval"
+              placeholder="Enter reminder interval:"
+            />
           </div>
           <div class="col-sm">
             <b-button v-on:click="postReminderUserbyID(usrid)"
               >post Reminder for user by id:</b-button
             >
-          </div>
-          <div class="col-sm">
-            <p class="result">{{ reminders }}</p>
           </div>
         </div>
       </div>
@@ -67,8 +80,8 @@ export default {
         interval: this.interval
       })
         .then((response) => {
-          this.reminders = response.data
-          console.log(response.data)
+          this.reminders = response.data.reminders
+          console.log(response.data.reminders)
           alert('reminder registered')
         })
         .catch((error) => {
@@ -86,14 +99,14 @@ export default {
 .btn_message {
   margin-bottom: 1em;
 }
-.inputtext{
+.inputtext {
   color: black;
 }
 #navbar {
   color: black;
 }
-.result{
-color: crimson;
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.result {
+  color: crimson;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 </style>

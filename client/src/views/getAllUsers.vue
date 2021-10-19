@@ -8,7 +8,9 @@
     <div class="row">
       <div class="col-sm">
         <div v-for="user in users" v-bind:key="user._id">
-          <p>{{ user._id }} {{ user.name }}</p>
+          <div v-show="user!=0">
+          <p>id: {{ user._id }} Name: {{ user.name }} Gender: {{user.gender}} Height: {{user.height}} Weight: {{user.weight}} Goals: {{user.goals}}<br></p>
+          </div>
         </div>
         <div class="row">
           <div class="col-sm">
@@ -18,8 +20,8 @@
             <b-button v-on:click="getuserbyID(usrid)">get user by id:</b-button>
           </div>
           <div class="col-sm">
-          <div v-if="usrid!==0">
-            <p class="userresult">{{ users }}</p>
+          <div v-if="users._id==usrid">
+            <p class="userresult">{{ users.name }} {{users.gender}} {{users.height}} {{users.weight}} {{users.goals}}</p>
           </div>
           </div>
         </div>
@@ -69,6 +71,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style>

@@ -8,7 +8,9 @@
     <div class="row">
       <div class="col-sm">
         <div v-for="food in foodtracks" v-bind:key="food._id">
-          <p class="foodres">{{ food }}</p>
+          <div v-if="food!=0">
+          <p class="foodres">id: {{food._id}} Name: {{ food.name }} protien: {{food.protien}} Carbs: {{food.carbs}} Fats: {{food.fats}}<br></p>
+          </div>
         </div>
         <div class="row">
           <div class="col-sm">

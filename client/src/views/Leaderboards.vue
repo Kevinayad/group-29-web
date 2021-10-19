@@ -5,7 +5,11 @@
         <b-button v-on:click="getLeaderboards()"
           >get List of leaderboards:</b-button
         >
-        <p>{{ leadboards }}</p>
+        <div v-for="leader in leadboards" v-bind:key="leader._id">
+          <div v-if="leader!=0">
+        <p>id:{{leader._id}} Name :{{leader.name}} Ranking: {{ leader.Ranking }} Points: {{ leader.Points }}<br></p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -53,7 +57,7 @@ export default {
       Api.put('/leadboards/' + leadI, {
         name: this.name,
         Ranking: this.Ranking,
-        points: this.points
+        Points: this.Points
       })
         .then((response) => {
           alert('leaderboard updated')
