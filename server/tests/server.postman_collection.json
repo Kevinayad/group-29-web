@@ -84,37 +84,6 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/reminders",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"reminders"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get/api/reminders?interval",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\",()=>{\r",
-									"    pm.expect(pm.response.code).to.eql(200);\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
 						"header": [
 							{
 								"key": "Accept",
@@ -128,19 +97,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/reminders?interval=4",
+							"raw": "{{host}}/api/reminders",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"reminders"
-							],
-							"query": [
-								{
-									"key": "interval",
-									"value": "4"
-								}
 							]
 						}
 					},
@@ -296,6 +259,222 @@
 			]
 		},
 		{
+			"name": "Statistics",
+			"item": [
+				{
+					"name": "post/api/statistics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set('statisticsid', jsonData._id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(201);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Testname\",\r\n    \"gender\":\"male\",\r\n    \"goals\":\"testgoal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/statistics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/api/statistics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/statistics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/api/statistics/_id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/statistics/{{statisticsid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"{{statisticsid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put/api/statistics/_id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Testnamereplaced\",\r\n    \"gender\":\"malereplaced\",\r\n    \"goals\":\"testgoalreplaced\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/statistics/{{statisticsid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"{{statisticsid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "del/api/statistics/_id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/statistics/{{statisticsid}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"{{statisticsid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "del/api/statistics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/statistics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Users",
 			"item": [
 				{
@@ -405,72 +584,6 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{host}}/api/users/{{userid}}/reminders",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userid}}",
-								"reminders"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get/api/user/_id/reminders",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\",()=>{\r",
-									"    pm.expect(pm.response.code).to.eql(200);\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/users/{{userid}}/reminders",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userid}}",
-								"reminders"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get/api/user/_id/reminders/remid",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\",()=>{\r",
-									"    pm.expect(pm.response.code).to.eql(200);\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
 						"url": {
 							"raw": "{{host}}/api/users/{{userid}}/reminders",
 							"host": [
@@ -696,40 +809,6 @@
 					"response": []
 				},
 				{
-					"name": "del/api/users/_id/reminders/remid",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\",()=>{\r",
-									"    pm.expect(pm.response.code).to.eql(200);\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/users/{{userid}}/reminders/{{reminderid}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userid}}",
-								"reminders",
-								"{{reminderid}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "del/api/users/_id",
 					"event": [
 						{
@@ -825,222 +904,6 @@
 							"path": [
 								"api",
 								"users"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Statistics",
-			"item": [
-				{
-					"name": "post/api/statistics",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"\r",
-									"var jsonData = pm.response.json();\r",
-									"pm.environment.set('statisticsid', jsonData._id);\r",
-									"\r",
-									"pm.test(\"Status code is 201\",()=>{\r",
-									"    pm.expect(pm.response.code).to.eql(201);\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Testname\",\r\n    \"gender\":\"male\",\r\n    \"goals\":\"testgoal\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/statistics",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"statistics"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get/api/statistics",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\",()=>{\r",
-									"    pm.expect(pm.response.code).to.eql(200);\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/statistics",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"statistics"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get/api/statistics/_id",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\",()=>{\r",
-									"    pm.expect(pm.response.code).to.eql(200);\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/statistics/{{statisticsid}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"statistics",
-								"{{statisticsid}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "put/api/statistics/_id",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\",()=>{\r",
-									"    pm.expect(pm.response.code).to.eql(200);\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Testnamereplaced\",\r\n    \"gender\":\"malereplaced\",\r\n    \"goals\":\"testgoalreplaced\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/statistics/{{statisticsid}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"statistics",
-								"{{statisticsid}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "del/api/statistics/_id",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\",()=>{\r",
-									"    pm.expect(pm.response.code).to.eql(200);\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/statistics/{{statisticsid}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"statistics",
-								"{{statisticsid}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "del/api/statistics",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\",()=>{\r",
-									"    pm.expect(pm.response.code).to.eql(200);\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/statistics",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"statistics"
 							]
 						}
 					},
@@ -1474,7 +1337,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Anna\",\n    \"Ranking\": \"1\",\n    \"Points\": 14\n }"
+							"raw": "{\n    \"name\": \"Anna\",\n    \"Ranking\": \"1\",\n    \"Points\": \"15\"\n }"
 						},
 						"url": {
 							"raw": "{{host}}/api/leadboards",
