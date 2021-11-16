@@ -5,28 +5,42 @@
         <b-button v-on:click="getLeaderboards()"
           >get List of leaderboards:</b-button
         >
-        <div v-for="leader in leadboards" v-bind:key="leader._id">
-          <div v-if="leader!=0">
-        <p>id:{{leader._id}} Name :{{leader.name}} Ranking: {{ leader.Ranking }} Points: {{ leader.Points }}<br></p>
-          </div>
-        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm"></div>
-      <div class="row">
-        <div class="col-sm">
-          <input v-model="leadid" placeholder="Enter leaderboard id:" />
-          <input v-model="name" placeholder="Enter new name" />
-          <input v-model="Ranking" placeholder="Enter new Ranking" />
-          <input v-model="Points" placeholder="Enter new Points" />
-        </div>
-        <div class="col-sm">
-          <b-button v-on:click="putLeaderboardbyID(leadid)">Put leaderboard by id:</b-button>
-        </div>
-        </div>
+      <div class="col-sm">
+        <input v-model="name" placeholder="Enter new name" />
+        <input v-model="Ranking" placeholder="Enter new Ranking" />
+        <input v-model="Points" placeholder="Enter new Points" />
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Ranking</th>
+              <th scope="col">Points</th>
+              <th scope="col">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="leader in leadboards" v-bind:key="leader._id">
+              <td>{{ leader.name }}</td>
+              <td>{{ leader.Ranking }}</td>
+              <td>{{ leader.Points }}</td>
+              <td>
+                <b-button v-on:click="putLeaderboardbyID(leader._id)"
+                  >Update this leaderboard</b-button
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
   <!-- <p>
           List of users:<br />
           {{ users }}
@@ -39,7 +53,12 @@ import { Api } from '@/Api'
 export default {
   data() {
     return {
-      leadboards: { name: '', Ranking: '', Points: '' }
+      Leaderboards: [],
+      leadboards: {
+        name: '',
+        Ranking: '',
+        Points: ''
+      }
     }
   },
   methods: {
