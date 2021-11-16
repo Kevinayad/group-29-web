@@ -7,27 +7,56 @@
     </div>
     <div class="row">
       <div class="col-sm">
-        <div v-for="user in users" v-bind:key="user._id">
-          <div v-show="user!=0">
-          <p>id: {{ user._id }} Name: {{ user.name }} Gender: {{user.gender}} Height: {{user.height}} Weight: {{user.weight}} Goals: {{user.goals}}<br></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm">
-            <input v-model="usrid" placeholder="Enter user id:" />
-          </div>
-          <div class="col-sm">
-            <b-button v-on:click="getuserbyID(usrid)">get user by id:</b-button>
-          </div>
-          <div class="col-sm">
-          <div v-if="users._id==usrid">
-            <p class="userresult">{{ users.name }} {{users.gender}} {{users.height}} {{users.weight}} {{users.goals}}</p>
-          </div>
-          </div>
-        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">More info</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="user in users" v-bind:key="user._id">
+              <td>{{ user.name }}</td>
+              <td><b-button v-on:click="getuserbyID(user._id)">Print user info!</b-button></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
+    <div class="row">
+      <div class="col-sm">
+        <p class="userresult">
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Height</th>
+              <th scope="col">Weight</th>
+              <th scope="col">Goals</th>
+            </tr>
+          </thead>
+          <tbody>
+          <td>{{ usr.name }}</td>
+          <td>{{ usr.gender }}</td>
+          <td>{{ usr.height }}</td>
+          <td>{{ usr.weight }}</td>
+          <td>{{ usr.goals }}</td>
+          </tbody>
+          </table>
+        </p>
+      </div>
+    </div>
+    <!-- <p>id: {{ user._id }} Name: {{ user.name }} Gender: {{user.gender}} Height: {{user.height}} Weight: {{user.weight}} Goals: {{user.goals}}<br></p> -->
+    <!-- <div class="row">
+      <div class="col-sm">
+          <p class="userresult">
+            {{ usr.name }} {{ usr.gender }} {{ usr.height }}
+            {{ usr.weight }} {{ usr.goals }}
+          </p>
+        </div>
+      </div> -->
+    </div>
   <!-- <p>
           List of users:<br />
           {{ users }}
@@ -40,7 +69,15 @@ import { Api } from '@/Api'
 export default {
   data() {
     return {
-      users: { name: '', gender: '', height: '', weight: '', goals: '' }
+      users: [],
+      user: {
+        name: '',
+        gender: '',
+        height: '',
+        weight: '',
+        goals: ''
+      },
+      usr: { name: '', gender: '', height: '', weight: '', goals: '' }
     }
   },
   methods: {
@@ -56,22 +93,23 @@ export default {
         })
         .catch((error) => {
           this.users = error
+          console.alert('no users registered')
         })
     },
     getuserbyID(userI) {
       Api.get('/users/' + userI)
         .then((response) => {
-          this.users = response.data
+          this.usr = response.data
           console.log(response.data)
         })
         .catch((error) => {
-          this.users = error
+          this.usr = error
           console.log(error)
+          console.alert('user does not exist')
         })
     }
   }
 }
-
 </script>
 
 <style>
@@ -84,7 +122,12 @@ export default {
 #navbar {
   color: black;
 }
-.userresult{
+.userresult {
   color: dimgrey;
+}
+table,
+th,
+td {
+  border: 1px solid black;
 }
 </style>
