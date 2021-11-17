@@ -6,35 +6,28 @@
     </div>
     <div class="row">
       <div class="col-sm">
-        <b-button variant="danger" @click="deleteAllReminders()">Delete All reminders</b-button>
-        <b-button @click="deleteReminderById(selectedreminder._id)">Delete selected reminder</b-button>
-        <table class="table">
-          <tbody>
-            <tr v-for="reminder in reminders" :key="reminder._id">
-              <td>{{reminder.reminderText}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <!--<li v-for="reminder in reminders" :key="reminder.id" @click="selectedreminder = reminder">
-          {{reminder.reminderText}}
-        </li>-->
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm">
         <p class="reminderresult">
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Reminder</th>
+                <th scope="col">Reminder Content</th>
                 <th scope="col">Interval</th>
               </tr>
             </thead>
             <tbody>
-            </tbody>
+            <tr v-for="reminder in reminders" :key="reminder._id">
+              <td>{{reminder.reminderText}}</td>
+              <td>{{reminder.interval}}</td>
+              <b-button @click="deleteReminderById(reminder._id)">Delete</b-button>
+            </tr>
+          </tbody>
           </table>
         </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <b-button variant="danger" @click="deleteAllReminders()">Delete All reminders</b-button>
       </div>
     </div>
     <div class="row">
