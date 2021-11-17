@@ -1,31 +1,24 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm">
-        <b-button v-on:click="getuser()">get List of users:</b-button>
-      </div>
+        <button @click="deleteUserById(currentuser._id), getusers()">Delete selected user</button>
     </div>
     <div class="row">
       <div class="col-sm">
-        <div v-for="user in users" v-bind:key="user._id">
-          <div v-if="user!=0">
-          <p>{{ user._id }} {{ user.name }}</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm">
-            <input v-model="usrid" placeholder="Enter user id:" />
-            <input v-model="remid" placeholder="Enter reminder id:" />
-          </div>
-          <div class="col-sm">
-            <b-button v-on:click="getReminderUserbyID(usrid, remid)"
-              >get Reminder for user by id:</b-button
-            >
-          </div>
-          <div class="col-sm">
-            <p class="reminderList">Reminder text: {{ reminders.reminderText }}<br> Reminder interval: {{reminders.interval}}</p>
-          </div>
-        </div>
+        <li v-for="user in users" :key ="user.id" @click="currentuser = user">
+          {{user.name}}
+        </li>
+        <p>Selected user: {{currentuser.name}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <p>Selected user's reminders: </p>
+        <h v-for="reminder in reminders" :key ="reminder.id">
+          <p v-if="reminder.user_id === currentuser._id" >
+            {{reminder.reminderText}}
+          </p>
+        </h>
       </div>
     </div>
   </div>
@@ -41,16 +34,24 @@ import { Api } from '@/Api'
 export default {
   data() {
     return {
-      users: { name: '', gender: '', height: '', weight: '', goals: '' },
-      reminders: { name: '', reminderText: '', interval: '', user_id: '' }
+      users: [],
+      user: { name: '', gender: '', height: '', weight: '', goals: '' },
+      currentuser: { name: '', gender: '', height: '', weight: '', goals: '' },
+      reminders: [],
+      reminder: { name: '', reminderText: '', interval: '', user_id: '' },
+      currentreminder: { name: '', reminderText: '', interval: '', user_id: '' }
     }
   },
+  mounted: function () {
+    this.getusers()
+    this.getreminders()
+  },
   methods: {
-    async getusers() {
+    /* async getusers() {
       const response = await Api.get('/users', {})
       console.log(response.data)
-    },
-    getuser() {
+    }, */
+    getusers() {
       Api.get('/users')
         .then((response) => {
           console.log(response.data.users)
@@ -58,6 +59,20 @@ export default {
         })
         .catch((error) => {
           this.users = error
+        })
+    },
+    deleteUserById(userid) {
+      Api.delete('/users/' + userid)
+        .then((response) => {
+          this.user = response.data.users
+          console.log(response.data.reminders)
+        })
+    },
+    getreminders() {
+      Api.get('/reminders')
+        .then((response) => {
+          this.reminders = response.data.reminders
+          console.log(response.data.reminders)
         })
     },
     getReminderUserbyID(userI, remid) {
