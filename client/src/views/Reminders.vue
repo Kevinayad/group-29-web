@@ -15,12 +15,12 @@
               </tr>
             </thead>
             <tbody>
-            <tr v-for="reminder in reminders" :key="reminder._id">
-              <td>{{reminder.reminderText}}</td>
-              <td>{{reminder.interval}}</td>
-              <b-button @click="deleteReminderById(reminder._id)">Delete</b-button>
-            </tr>
-          </tbody>
+              <tr v-for="reminder in reminders" :key="reminder._id">
+                <td>{{reminder.reminderText}}</td>
+                <td>{{reminder.interval}}</td>
+                <b-button @click="deleteReminderById(reminder._id)">Delete</b-button>
+              </tr>
+            </tbody>
           </table>
         </p>
       </div>
