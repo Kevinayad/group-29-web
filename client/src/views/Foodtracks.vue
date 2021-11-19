@@ -1,41 +1,47 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-sm">
-        <b-button v-on:click="getFoods()">get List of foods:</b-button>
-      </div>
+    <div class="col-sm">
+        <b-button v-on:click="getFoods()">get All foods: </b-button>
     </div>
     <div class="row">
       <div class="col-sm">
-        <div v-for="food in foodtracks" v-bind:key="food._id">
-          <div v-if="food!=0">
-          <p class="foodres">id: {{food._id}} Name: {{ food.name }} protien: {{food.protien}} Carbs: {{food.carbs}} Fats: {{food.fats}}<br></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm">
-            <input v-model="foodid" placeholder="Enter food id:" />
-            <input v-model="fats" placeholder="Enter fat content:" />
-            <input v-model="protien" placeholder="Enter protien content:" />
-          </div>
-          <div class="col-sm">
-            <b-button v-on:click="patchFoodbyID(foodid)"
-              >edit food by id:</b-button
-            >
-          </div>
-          <div class="col-sm">
-            <div v-if="foodid !== 0">
-              <p>{{ food }}</p>
-            </div>
-          </div>
-        </div>
+        <p> Edit an item here </p>
+        <input v-model="foodtrack.name" placeholder="Enter new name" />
+        <input v-model="foodtrack.protien" placeholder="Enter new Protein" />
+        <input v-model="foodtrack.carbs" placeholder="Enter new Carbs" />
+        <input v-model="foodtrack.fats" placeholder="Enter new Fats" />
       </div>
     </div>
+    <div class="row">
+      <br>
+      <div class="col-sm"><br>
+        <h3> List of all foodtracks </h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Food name</th>
+              <th>Protien</th>
+              <th>Carbs</th>
+              <th>Fats</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="foodtrack in foodtracks" v-bind:key="foodtrack._id">
+              <td>{{ foodtrack.name }}</td>
+              <td>{{ foodtrack.protien }}</td>
+              <td>{{ foodtrack.carbs }}</td>
+              <td>{{ foodtrack.fats }}</td>
+              <td>
+                <b-button v-on:click="patchFoodByID(foodI)"
+                  >Update this leaderboard</b-button
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
   </div>
-  <!-- <p>
-          List of users:<br />
-          {{ users }}
-        </p> -->
+    </div>
 </template>
 
 <script>
@@ -44,7 +50,8 @@ import { Api } from '@/Api'
 export default {
   data() {
     return {
-      foodtracks: { name: '', protien: '', carbs: '', fats: '' }
+      foodtracks: [],
+      foodtrack: { name: '', protien: '', carbs: '', fats: '' }
     }
   },
   methods: {
@@ -60,7 +67,9 @@ export default {
     },
     patchFoodbyID(foodI) {
       Api.patch('/foodtracks/' + foodI, {
+        name: this.name,
         protien: this.protien,
+        carbs: this.carbs,
         fats: this.fats
       })
         .then((response) => {

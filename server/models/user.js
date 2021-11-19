@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema ({
-    name: { type: String},
+    userName: { type: String},
     gender: { type: String},
     height: {type : Number},
     weight: {type: Number},
-    goals: { type: String},
+    goals: { type: String}
 
 
 });

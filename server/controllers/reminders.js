@@ -106,4 +106,86 @@ router.delete('api/reminders/:_id', function(req,res, next){
         res.json(reminders);
     });
 });
+//Create reminder for specific user
+router.post('/api/users/:_id/reminders', function (req, res, next) {
+    var _id = req.params._id;
+    User.findById(id, function(err, user) {
+        if (err) {
+            return next(err);
+        }
+        if (user === null) {
+            return res.status(404).json({
+                message: "User does not exist",
+            });
+        } else {
+            var reminder = new Reminder({
+                name: req.body.name,
+                reminderText: req.body.reminderText,
+                interval: req.body.interval,
+                users: id,
+            });
+            reminder.save(function(err, reminder) {
+                if (err) {
+                    return console.error(err);
+                }
+                res.status(201).json(reminder);
+                console.log(req.body);
+                //  console.log('recipe id is %s', ingredient.recipes._id);
+            });
+        }
+    });
+});
+//Get all reminders of specific user
+router.get('/api/users/:_id/reminders', function (req, res, next) {
+    var _id = req.params._id;
+    Reminder.findById(_id, function (err, reminder) {
+        if (err) { 
+            return next(err); 
+        }
+        if (recipe === null) {
+            return res.status(404).json({
+                message: "Reminder does not exist",
+            });
+        } else {
+            Reminder.find({
+                users: id,
+            }).exec(function(err, reminder) {
+                if (err) {
+                    return next(err);
+                }
+                res.json({
+                    reminders: reminder,
+                });
+            });
+        }
+    });
+});
+//Get specific reminder from specific user
+router.get('/api/users/:_id/reminders/:remid', function (req, res, next) {
+    var id = req.params.remid;
+    Reminder.findById(id, function (err, reminders) {
+        if (err) { 
+            return next(err); 
+        }
+        if (reminders == null) {
+            return res.status(404).json({ 
+                message: "reminder not found",
+             });
+
+        } res.json({ "reminders": reminders });
+    });
+
+});
+//Delete specific reminder from specific user
+router.delete('/api/users/:_id/reminders/:remid', function (req, res, next) {
+    var id = req.params.remid;
+    Reminder.findOneAndDelete(id, function (err, reminders) {
+        if (err) { return next(err); }
+        if (reminders == null) {
+            return res.status(404).json({ "message": "reminder not found" });
+
+        } res.json({ "reminders": reminders });
+    });
+
+});
 module.exports = router;

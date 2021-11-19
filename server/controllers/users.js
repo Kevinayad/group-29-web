@@ -10,18 +10,7 @@ router.post('/api/users', function (req, res, next) {
         res.status(201).json(user);
     })
 });
-//Create reminder for specific user
-router.post('/api/users/:_id/reminders', function (req, res, next) {
 
-    var reminder = new Reminder(req.body);
-    reminder.user_id = req.params._id;
-    reminder.save(function (err, reminder) {
-        if (err) {
-            return next(err);
-        }
-        res.status(201).json(reminder);
-    })
-});
 //Get all users
 router.get('/api/users', function (req, res, next) {
     User.find(function (err, users) {

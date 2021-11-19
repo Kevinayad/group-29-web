@@ -5,6 +5,6 @@ var reminderSchema = new Schema({
     name: {type:String},
     reminderText: {type:String},
     interval: {type:Number},
-    user_id: {type:String}
+    userID: {type:String},
 })
 module.exports = mongoose.model('reminders',reminderSchema)
