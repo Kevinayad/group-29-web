@@ -6,9 +6,9 @@
   <div class="row mt-3">
     <div class="col-lg-6">
       <h3 class="text info">Create reminder for selected user</h3>
-      <input v-model="reminder.name" placeholder="Enter new name" />
-        <input v-model="reminder.reminderText" placeholder="Enter Reminder text" />
-        <input v-model="reminder.interval" placeholder="Enter reminder interval" />
+      <input v-model="reminders.name" placeholder="Enter new name" />
+        <input v-model="reminders.reminderText" placeholder="Enter Reminder text" />
+        <input v-model="reminders.interval" placeholder="Enter reminder interval" />
     </div>
   </div>
    <div class="row mt-3 ml-3"> <h3 class="text-info">List of Users</h3></div>
@@ -21,15 +21,18 @@
           <th>Name</th>
           <th>Reminder text </th>
           <th>Reminder interval </th>
+          <th>User Name</th>
           <th>Create reminder</th>
         </tr>
         </thead>
         <tbody>
-          <tr class="text-center" v-for="reminde in reminder" v-bind:key="reminde._id">
+          <tr class="text-center" v-for="reminde in reminders" v-bind:key="reminde._id">
             <td> {{ reminde.name }}</td>
             <td> {{ reminde.reminderText }}</td>
             <td> {{ reminde.interval }}</td>
-            <td><a href="#" class="text-success"><i class="far fa-edit" @click="showAddModal=true; "></i></a></td>
+             <td> {{ reminde.userName }}</td>
+            <td><b-button v-on:click="postReminderUserbyID(reminde._id)"
+              >post Reminder for user by id:</b-button></td>
           </tr>
         </tbody>
     </table>
@@ -79,11 +82,11 @@ export default {
     getreminder() {
       Api.get('/reminders')
         .then((response) => {
-          console.log(response.data.reminder)
-          this.users = response.data.reminder
+          console.log(response.data.reminders)
+          this.reminders = response.data.reminders
         })
         .catch((error) => {
-          this.reminder = error
+          this.reminders = error
         })
     },
     getUserReminders(){
@@ -98,10 +101,11 @@ export default {
     },
     },
     postReminderUserbyID(userI) {
-      Api.post('/users/' + userI + '/reminders/', {
+      Api.post('/users/' + userI + '/reminders', {
         name: this.name,
         reminderText: this.reminderText,
-        interval: this.interval
+        interval: this.interval,
+        userName: this.userName
       })
         .then((response) => {
           this.reminders = response.data.reminders
@@ -109,7 +113,7 @@ export default {
           alert('reminder registered')
         })
         .catch((error) => {
-          this.reminders = error
+          this.reminder = error
         })
     }
   }
