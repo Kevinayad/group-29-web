@@ -58,7 +58,8 @@ export default {
         name: '',
         Ranking: '',
         Points: ''
-      }
+      },
+      leadboard: { name: '', Ranking: '', Points: '' }
     }
   },
   methods: {
