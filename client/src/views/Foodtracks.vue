@@ -5,32 +5,30 @@
         <b-button v-on:click="getFoods()">get List of foods:</b-button>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm">
-        <div v-for="food in foodtracks" v-bind:key="food._id">
-          <div v-if="food!=0">
-          <p class="foodres">id: {{food._id}} Name: {{ food.name }} protien: {{food.protien}} Carbs: {{food.carbs}} Fats: {{food.fats}}<br></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm">
-            <input v-model="foodid" placeholder="Enter food id:" />
-            <input v-model="fats" placeholder="Enter fat content:" />
-            <input v-model="protien" placeholder="Enter protien content:" />
-          </div>
-          <div class="col-sm">
-            <b-button v-on:click="patchFoodbyID(foodid)"
-              >edit food by id:</b-button
-            >
-          </div>
-          <div class="col-sm">
-            <div v-if="foodid !== 0">
-              <p>{{ food }}</p>
-            </div>
-          </div>
-        </div>
+     <div class="col-sm">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Ranking</th>
+              <th scope="col">Points</th>
+              <th scope="col">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="leader in leadboards" v-bind:key="leader._id">
+              <td>{{ leader.name }}</td>
+              <td>{{ leader.Ranking }}</td>
+              <td>{{ leader.Points }}</td>
+              <td>
+                <b-button v-on:click="putLeaderboardbyID(leader._id)"
+                  >Update this leaderboard</b-button
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
   </div>
   <!-- <p>
           List of users:<br />
