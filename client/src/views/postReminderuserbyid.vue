@@ -25,7 +25,7 @@
         <tbody>
           <tr class="text-center" v-for="user in users" :key="user.id">
             <td> {{ user.name }}</td>
-            <td><b-button @click="postReminderUserbyID(user._id)">post Reminder for user by id:</b-button></td>
+            <td><b-button @click="postReminderUserbyID(user._id)">Add reminder</b-button></td>
           </tr>
         </tbody>
     </table>
@@ -98,11 +98,11 @@ export default {
         interval: this.reminderinterval,
         user_id: userid
       })
-        /* .then((response) => {
+         .then((response) => {
           this.reminders = response.data.reminders
           console.log(response.data.reminders)
           alert('reminder registered')
-        }) */
+        })
         .catch((error) => {
           this.reminder = error
         })
