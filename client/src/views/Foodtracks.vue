@@ -2,33 +2,37 @@
   <div class="container">
     <div class="row">
       <div class="col-sm">
+        <input v-model="protien" placeholder="Enter new Protien content" />
+        <input v-model="fats" placeholder="Enter Fat Content" />
         <b-button v-on:click="getFoods()">get List of foods:</b-button>
       </div>
     </div>
-     <div class="col-sm">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Ranking</th>
-              <th scope="col">Points</th>
-              <th scope="col">Update</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="leader in leadboards" v-bind:key="leader._id">
-              <td>{{ leader.name }}</td>
-              <td>{{ leader.Ranking }}</td>
-              <td>{{ leader.Points }}</td>
-              <td>
-                <b-button v-on:click="putLeaderboardbyID(leader._id)"
-                  >Update this leaderboard</b-button
-                >
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="col-sm">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Protien</th>
+            <th scope="col">Carbs</th>
+            <th scope="col">Fats</th>
+            <th scope="col">Button</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="food in foodtracks" v-bind:key="food._id">
+            <td>{{ food.name }}</td>
+            <td>{{ food.protien }}</td>
+            <td>{{ food.carbs }}</td>
+            <td>{{ food.fats }}</td>
+            <td>
+              <b-button v-on:click="patchFoodbyID(food._id)"
+                >Update this food</b-button
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <!-- <p>
           List of users:<br />
@@ -44,6 +48,9 @@ export default {
     return {
       foodtracks: { name: '', protien: '', carbs: '', fats: '' }
     }
+  },
+  mounted: function () {
+    this.getFoods()
   },
   methods: {
     getFoods() {
@@ -82,7 +89,7 @@ export default {
 #navbar {
   color: black;
 }
-.foodres{
+.foodres {
   color: green;
 }
 </style>
