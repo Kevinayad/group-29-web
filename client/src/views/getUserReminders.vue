@@ -1,24 +1,30 @@
 <template>
   <div class="container">
     <div class="row">
-        <button @click="deleteUserById(currentuser._id), getusers()">Delete selected user</button>
-    </div>
-    <div class="row">
       <div class="col-sm">
-        <li v-for="user in users" :key ="user.id" @click="currentuser = user">
-          {{user.name}}
-        </li>
-        <p>Selected user: {{currentuser.name}}</p>
-      </div>
-    </div>
-    <div class="row">
-      <div>
-        <p>Selected user's reminders: </p>
-        <h v-for="reminder in reminders" :key ="reminder.id">
-          <p v-if="reminder.user_id === currentuser._id" >
-            {{reminder.reminderText}}
-          </p>
-        </h>
+        <p class="reminders">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">User</th>
+                <th scope="col">Reminder content</th>
+                <th scope="col">Interval</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="user in users" :key="user._id">
+                {{setTempUser(user._id)}}
+                <td>{{user.name}}</td>
+                <td>
+                  <li v-for="reminder in filteredReminders" :key="reminder._id">{{reminder.reminderText}}</li>
+                </td>
+                <td>
+                  <li v-for="reminder in filteredReminders" :key="reminder._id">{{reminder.interval}}</li>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </p>
       </div>
     </div>
   </div>
@@ -34,10 +40,12 @@ import { Api } from '@/Api'
 export default {
   data() {
     return {
+      tempUserI: '',
       users: [],
       user: { name: '', gender: '', height: '', weight: '', goals: '' },
       currentuser: { name: '', gender: '', height: '', weight: '', goals: '' },
       reminders: [],
+      sortedreminder: [],
       reminder: { name: '', reminderText: '', interval: '', user_id: '' },
       currentreminder: { name: '', reminderText: '', interval: '', user_id: '' }
     }
@@ -46,11 +54,21 @@ export default {
     this.getusers()
     this.getreminders()
   },
+  computed: {
+    filteredReminders() {
+      return this.reminders.filter((reminder) => {
+        return (reminder.user_id === this.tempUserI)
+      })
+    }
+  },
   methods: {
     /* async getusers() {
       const response = await Api.get('/users', {})
       console.log(response.data)
     }, */
+    setTempUser(userI) {
+      this.tempUserI = userI
+    },
     getusers() {
       Api.get('/users')
         .then((response) => {
