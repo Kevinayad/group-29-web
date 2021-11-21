@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <div class="row">
+      <h1>List of user reminders</h1>
+    </div>
+    <div class="row">
       <div class="col-sm">
         <p class="reminders">
           <table class="table">
