@@ -12,13 +12,14 @@
               <tr>
                 <th scope="col">Reminder Content</th>
                 <th scope="col">Interval</th>
+                <th scope="col">Delete reminder</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="reminder in reminders" :key="reminder._id">
                 <td>{{reminder.reminderText}}</td>
                 <td>{{reminder.interval}}</td>
-                <b-button @click="deleteReminderById(reminder._id)">Delete</b-button>
+                <td><b-button @click="deleteReminderById(reminder._id)">Delete</b-button></td>
               </tr>
             </tbody>
           </table>
