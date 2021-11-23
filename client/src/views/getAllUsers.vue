@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm">
-        <b-button v-on:click="getuser()">get List of users:</b-button>
+        <b-button v-on:click="getuser()">refresh list of users:</b-button>
       </div>
     </div>
     <div class="row">
@@ -79,6 +79,9 @@ export default {
       },
       usr: { name: '', gender: '', height: '', weight: '', goals: '' }
     }
+  },
+  mounted: function () {
+    this.getuser()
   },
   methods: {
     async getusers() {

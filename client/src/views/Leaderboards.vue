@@ -3,19 +3,19 @@
     <div class="row">
       <div class="col-sm">
         <b-button v-on:click="getLeaderboards()"
-          >get List of leaderboards:</b-button
+          >Refresh list of leaderboards:</b-button
         >
       </div>
     </div>
     <div class="row">
-      <div class="col-sm">
+      <div class="mt-2 col-sm">
         <input v-model="name" placeholder="Enter new name" />
         <input v-model="Ranking" placeholder="Enter new Ranking" />
         <input v-model="Points" placeholder="Enter new Points" />
       </div>
     </div>
     <div class="row">
-      <div class="col-sm">
+      <div class="mt-2 col-sm">
         <table class="table">
           <thead>
             <tr>
@@ -61,6 +61,9 @@ export default {
       },
       leadboard: { name: '', Ranking: '', Points: '' }
     }
+  },
+  mounted: function () {
+    this.getLeaderboards()
   },
   methods: {
     getLeaderboards() {
