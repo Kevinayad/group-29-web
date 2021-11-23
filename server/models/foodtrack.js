@@ -3,9 +3,9 @@ var Schema = mongoose.Schema;
 
 var foodtrackSchema = new Schema ({
     name: { type: String},
-    protien: { type: Number},
-    carbs: { type: Number},
-    fats: { type: Number}
+    protien: { type: String},
+    carbs: { type: String},
+    fats: { type: String}
 });
 module.exports = mongoose.model('foodtracks', foodtrackSchema);
 
