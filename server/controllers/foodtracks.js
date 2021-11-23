@@ -53,6 +53,7 @@ router.patch('/api/foodtracks/:_id', function (req, res, next) {
             return res.status(404).json({ "message": "foodtracks not found" });
         }
         foodtracks.protien = (req.body.protien || foodtracks.protien);
+        foodtracks.carbs = (req.body.carbs || foodtracks.carbs);
         foodtracks.fats = (req.body.fats || foodtracks.fats);
         foodtracks.save();
         res.json(foodtracks);
