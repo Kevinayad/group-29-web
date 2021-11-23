@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm">
         <b-button v-on:click="getLeaderboards()"
-          >get List of leaderboards:</b-button
+          >Refresh List of leaderboards:</b-button
         >
       </div>
     </div>
@@ -61,6 +61,9 @@ export default {
       },
       leadboard: { name: '', Ranking: '', Points: '' }
     }
+  },
+  mounted: function () {
+    this.getLeaderboards()
   },
   methods: {
     getLeaderboards() {
