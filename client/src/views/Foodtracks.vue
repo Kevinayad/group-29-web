@@ -6,13 +6,17 @@
       </div>
       </div>
     <div class="row">
-      <div class="col-sm">
+      <div class="mt-2 col-sm">
         <input v-model="protien" placeholder="Enter Protien content" />
+      </div>
+      <div class="mt-2 col-sm">
         <input v-model="carbs" placeholder="Enter Carbs content" />
+      </div>
+      <div class="mt-2 col-sm">
         <input v-model="fats" placeholder="Enter Fat Content" />
       </div>
     </div>
-    <div class="col-sm">
+    <div class="mt-2 col-sm">
       <table class="table">
         <thead>
           <tr>
