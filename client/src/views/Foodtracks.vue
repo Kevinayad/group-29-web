@@ -2,10 +2,14 @@
   <div class="container">
     <div class="row">
       <div class="col-sm">
+      <b-button v-on:click="getFoods()">Refresh list of foods:</b-button>
+      </div>
+      </div>
+    <div class="row">
+      <div class="col-sm">
         <input v-model="protien" placeholder="Enter Protien content" />
         <input v-model="carbs" placeholder="Enter Carbs content" />
         <input v-model="fats" placeholder="Enter Fat Content" />
-        <b-button v-on:click="getFoods()">get List of foods:</b-button>
       </div>
     </div>
     <div class="col-sm">
