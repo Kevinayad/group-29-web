@@ -2,61 +2,37 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm">
-        <b-button variant="danger" v-on:click="deleteAllReminders"
-          >Delete All reminders</b-button
-        >
-        <div v-for="(reminder, reminderKey) in reminders" :key="reminderKey">
-          <div
-            v-for="(interval, intervalKey) in reminder.interval"
-            :key="intervalKey"
-          >
-            <li>{{ reminders }}</li>
-          </div>
-        </div>
-      </div>
+        <h1>List of all reminders</h1>
     </div>
-    <!-- <div class="row">
-      <div class="col-sm">
-        <form @submit="submit">
-          <div class="form-group">
-            <label for="reminderText">Reminder:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="reminderText"
-              placeholder="Enter reminder content"
-              v-model="reminder.reminderText"
-            />
-          </div>
-          <div>
-            <label>Reminder Interval(Days):</label>
-          </div>
-          <div>
-            <select v-model="reminder.interval">
-              <option disabled value="">Select Interval</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-            </select>
-            <span>Interval:{{ reminder.interval }}</span>
-          </div>
-        </form>
-      </div>
-    </div>
-    <b-button v-on:click="createReminder">Create reminder</b-button> -->
     <div class="row">
       <div class="col-sm">
-        <input v-model="remid" placeholder="Enter reminder id:" />
+        <p class="reminderresult">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Reminder Content</th>
+                <th scope="col">Interval</th>
+                <th scope="col">Delete reminder</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="reminder in reminders" :key="reminder._id">
+                <td>{{reminder.reminderText}}</td>
+                <td>{{reminder.interval}}</td>
+                <td><b-button @click="deleteReminderById(reminder._id)">Delete</b-button></td>
+              </tr>
+            </tbody>
+          </table>
+        </p>
       </div>
+    </div>
+    <div class="row">
       <div class="col-sm">
-        <b-button v-on:click="deleteReminderbyID(remid)"
-          >delete reminder by id:</b-button
-        >
+        <b-button variant="danger" @click="deleteAllReminders()">Delete All reminders</b-button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
       </div>
     </div>
   </div>
@@ -71,31 +47,16 @@ export default {
   created() {
     this.reminderId = this.$route.params.id
   },
-  mounted() {
-    // Load the real recipes from the server
-    Api.get('/reminders')
-      .then((response) => {
-        this.reminders = response.data
-        console.log(response.data)
-      })
-      .catch((error) => {
-        this.message = error.message
-        console.error(error)
-        this.reminder = []
-        // TODO: display error message
-      })
-      .then(() => {})
-  },
   data() {
     return {
       reminders: [],
-      reminder: {
-        name: '',
-        reminderText: '',
-        interval: ''
-      },
+      reminder: { name: '', reminderText: '', interval: '' },
+      selectedreminder: { name: '', reminderText: '', interval: '' },
       show: true
     }
+  },
+  mounted() {
+    this.getreminders()
   },
   methods: {
     createReminder() {
@@ -109,11 +70,12 @@ export default {
           console.error(error)
         })
     },
-    getReminder() {
-      Api.get('/reminders').then((response) => {
-        this.reminders = response.data
-        console.log(response.data)
-      })
+    getreminders() {
+      Api.get('/reminders')
+        .then((response) => {
+          this.reminders = response.data.reminders
+          console.log(response.data.reminders)
+        })
     },
     deleteAllReminders() {
       Api.delete('/reminders')
@@ -131,49 +93,12 @@ export default {
           //   This code is always executed at the end. After success or failure.
         })
     },
-    submit() {
-      console.log('hello')
-      Api.post('/reminders', this.reminder)
+    deleteReminderById(reminderid) {
+      Api.delete('/reminders/' + reminderid)
         .then((response) => {
-          alert('Reminder created')
-          const reminder = response.data
-          console.log(response.data)
-          this.reminder.id = reminder._id
-        })
-        .catch((error) => {
-          this.message = error.message
-          console.error(error)
-        })
-        .then(() => {
-          // make input boxes empty
-        })
-    },
-    addUser() {
-      const id = this.statistic.id
-      if (id != null && this.user.name && this.user.goal) {
-        console.log(id)
-        Api.post(`/reminders/${id}/users`, this.user)
-          .then((response) => {
-            alert('User added')
-            console.log(response.data)
-            // window.location.reload()
-          })
-          .catch((error) => {
-            this.message = error.message
-            console.error(error)
-          })
-          .then(() => {})
-      }
-    },
-    deleteReminderbyID(remI) {
-      Api.delete('/reminders/' + remI)
-        .then((response) => {
-          this.users = response.data
-          alert('reminder deleted')
-          console.log(response.data)
-        })
-        .catch((error) => {
-          this.users = error
+          this.reminders = response.data.reminders
+          console.log(response.data.reminders)
+          this.getreminders()
         })
     }
   }
