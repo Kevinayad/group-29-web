@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema ({
     name: { type: String},
     gender: { type: String},
-    height: {type : Number},
-    weight: {type: Number},
+    height: {type : String},
+    weight: {type: String},
     goals: { type: String},
 
 
